@@ -1,0 +1,87 @@
+<%- include('../patials/nav-bar.ejs')  %>
+<div class="wrapper">
+    <div class="container ">
+       
+        <div class="row py-3 mx-auto">
+            <div class="col-sm-5 col-md-6 align-self-center">
+                <img class="img-fluid " style="width: 30rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="<%= collection.poster %> " alt="">
+            </div>
+            <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 align-self-center ">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= collection.teaser %> " allowfullscreen></iframe>
+                  </div>
+                <div class="card my-5">
+                    <div class="card-body">
+                        <h4 class="card-title text-center"><%= collection.name  %></h4>
+                        <h6 class="card-title"><i class="fas fa-tags">&nbsp&nbsp</i>Genre&nbsp: Action</h6>
+                        <h6 class="card-title"><i class="fas fa-eye">&nbsp&nbsp</i>Rate&nbsp&nbsp&nbsp&nbsp: PG-13</h6>
+                        <h6 class="card-title"><i class="fas fa-stopwatch">&nbsp&nbsp&nbsp</i>Time&nbsp&nbsp&nbsp: 112</h6>
+                      </div>
+                </div>
+            </div>
+          </div>       
+            
+  </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="container py-3 ">
+      <div class="text-center">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" > Showtime
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off" checked> Infomations
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option3" autocomplete="off"> Reviews
+          </label>
+        </div>
+      </div>
+      
+      <div class="row pt-3 mx-auto">
+        <div class="col-sm-5 col-md-6">
+          <div class="card ">
+            <div class="card-body">
+              <h5 class="card-title">Rollout</h5>
+              <h6 class="card-title ">Domestic</h6>
+              <p class="card-text">$XXXXXXXX</p>
+              <h6 class="card-title ">International</h6>
+              <p class="card-text">$XXXXXXXX</p>
+              <h6 class="card-title ">Worldwide</h6>
+              <p class="card-text">$XXXXXXXX</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title ">Synosis</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, aperiam nesciunt. Quo recusandae alias facilis veniam officia ducimus ipsa eligendi nisi adipisci commodi, provident sequi delectus mollitia dolore debitis fugit?</p>
+              </div>
+            </div>
+            <div class="card mt-2">
+              <div class="card-body">
+                <h5 class="card-title">Director</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, aperiam nesciunt. Quo recusandae alias facilis veniam officia ducimus ipsa eligendi nisi adipisci commodi, provident sequi delectus mollitia dolore debitis fugit?</p>
+              </div>
+            </div>
+            <div class="card mt-2">
+              <div class="card-body">
+                <h5 class="card-title">Cast&Crew</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, aperiam nesciunt. Quo recusandae alias facilis veniam officia ducimus ipsa eligendi nisi adipisci commodi, provident sequi delectus mollitia dolore debitis fugit?</p>
+              </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>  
+
+  <!-- <div class="card col-sm-4">
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    </div>
+  </div> -->

@@ -1,0 +1,28 @@
+<%- include('patials/nav-bar.ejs')  %>
+<div class="wrapper">
+    <div class="container">
+        <h1>Login</h1>
+        <%- messages()  %> 
+        <form action="/login" method="post">
+            <div class="form-group">
+                <input type="text" name="username" id="" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" id="" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Login" class="btn btn-primary my-2">
+                <p>Don’t have an account? Sign up <a href="/register">Sign up</a></p>
+            </div>
+            
+            <!-- <a class="btn btn-primary" href="/register">Register</a> -->
+            
+        </form>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $('#messages').addClass('alert alert-danger');
+    })
+</script>

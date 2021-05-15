@@ -1,0 +1,57 @@
+
+body {
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-attachment: fixed;
+}
+
+.wrapper {
+  padding: 1%;
+}
+
+
+.wrapper .container {
+  background: rgba(122, 122, 122, 0.8);
+  border-radius: 10px;
+}
+
+
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+}
+
+/* .blur {
+  filter: blur(10px);  
+}
+
+
+.centered {
+  min-width: 310px;
+  max-width: 42%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.slideads {
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-size: 120%;
+  
+}
+
+
+.slideads .img-item {
+    width: auto;
+    height: auto;
+    max-height: 30rem;
+    max-width: 100%;
+}
+

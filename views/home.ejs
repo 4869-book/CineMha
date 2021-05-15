@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('patials/nav-bar.ejs')  %>
+    <%- include('patials/adsSlide.ejs')  %>
+    
+    <div class="container">
+      <%- messages() %>
+    </div>
+      <div class="wrapper">
+        <div class="container">
+          <div class="card-header">
+            <h1>Popular in Theaters</h1>
+          </div>
+          <%- include('patials/example_list2.ejs')  %>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="container">
+          <div class="card-header">
+            <h1>Top Box Office</h1>
+          </div>
+          <%- include('patials/example_list2.ejs')  %>
+        </div>
+      </div>
+
+    
+  </body>
+</html>
+<script>
+  $(function(){
+        $('#messages').addClass('alert alert-success my-3');
+    })
+</script>

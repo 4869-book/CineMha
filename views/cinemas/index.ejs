@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Cinemas</title>
+</head>
+<body>
+    <%- include('../patials/nav-bar.ejs')  %>
+    <!-- <a href="cinemas/new" class="btn btn-primary my-2 float-right">Add New Cinema</a>   -->
+    
+    <div class="container pt-4 text-center">
+      <div class="btn-group btn-group-toggle " data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked> By Location
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="option2" autocomplete="off"> By System
+        </label>
+        </div>	
+    </div>
+    
+    <div class="wrapper">
+      <div class="container py-1">
+        <%- messages() %> 
+          <% collection.forEach(collection => { %>
+            <div class="card mx-auto container-fluid my-3" style="max-width: 720px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4 my-2 pl-2">
+                    <img src="<%= collection.picture %>" class="card-img" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h4 class="card-title"><%= collection.name %> </h4>
+                      <p class="card-text"><%= collection.location %> </p>
+                      <% for(var i = 0 ; i<4;i++){ %>
+                        <i class="fas fa-star"></i>
+                      <% }; %> 
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <% }); %> 
+    </div>
+    </div>
+
+</body>
+<script>
+	$(function(){
+        $('#messages').addClass('alert alert-success my-3');
+    })
+	</script>
+</html>
