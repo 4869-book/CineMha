@@ -29,59 +29,59 @@
       <div class="text-center">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-secondary active">
-            <input type="radio" name="options" id="option1" autocomplete="off" > Showtime
+            <input type="radio" onclick="myFunction3()"> Showtime
           </label>
           <label class="btn btn-secondary">
-            <input type="radio" name="options" id="option2" autocomplete="off" checked> Infomations
+            <input onclick="myFunction1()" type="radio"  checked> Infomations
           </label>
           <label class="btn btn-secondary">
-            <input type="radio" name="options" id="option3" autocomplete="off"> Reviews
+            <input type="radio" onclick="myFunction2()"> Reviews
           </label>
         </div>
       </div>
       
-      <div class="row pt-3 mx-auto">
-        <div class="col-sm-5 col-md-6">
-          <div class="card ">
-            <div class="card-body">
-              <h5 class="card-title">Rollout</h5>
-              <h6 class="card-title ">Domestic</h6>
-              <p class="card-text">$XXXXXXXX</p>
-              <h6 class="card-title ">International</h6>
-              <p class="card-text">$XXXXXXXX</p>
-              <h6 class="card-title ">Worldwide</h6>
-              <p class="card-text">$XXXXXXXX</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title ">Synosis</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, aperiam nesciunt. Quo recusandae alias facilis veniam officia ducimus ipsa eligendi nisi adipisci commodi, provident sequi delectus mollitia dolore debitis fugit?</p>
-              </div>
-            </div>
-            <div class="card mt-2">
-              <div class="card-body">
-                <h5 class="card-title">Director</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, aperiam nesciunt. Quo recusandae alias facilis veniam officia ducimus ipsa eligendi nisi adipisci commodi, provident sequi delectus mollitia dolore debitis fugit?</p>
-              </div>
-            </div>
-            <div class="card mt-2">
-              <div class="card-body">
-                <h5 class="card-title">Cast&Crew</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, aperiam nesciunt. Quo recusandae alias facilis veniam officia ducimus ipsa eligendi nisi adipisci commodi, provident sequi delectus mollitia dolore debitis fugit?</p>
-              </div>
-            </div>
-        </div>
+      <div class="" id="info">
+          <%- include('movies_patials/info.ejs')  %> 
       </div>
+
+      <div class="hide" id="rev">
+        <%- include('movies_patials/reviews.ejs')  %> 
+      </div>
+
+      <div class="hide" id="show">
+        <%- include('movies_patials/showtimes.ejs')  %> 
+      </div>
+
+      
 
     </div>
   </div>  
 
-  <!-- <div class="card col-sm-4">
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    </div>
-  </div> -->
+  <script>
+    function myFunction1() {
+       var x = document.getElementById("info");
+       var y = document.getElementById("rev");
+       var z = document.getElementById("show");
+       x.classList.remove("hide");
+       y.classList.add("hide");
+       z.classList.add("hide");
+    }
+
+    function myFunction2() {
+       var x = document.getElementById("info");
+       var y = document.getElementById("rev");
+       var z = document.getElementById("show");
+       x.classList.add("hide");
+       y.classList.remove("hide");
+       z.classList.add("hide");
+    }
+
+    function myFunction3() {
+       var x = document.getElementById("info");
+       var y = document.getElementById("rev");
+       var z = document.getElementById("show");
+       x.classList.add("hide");
+       y.classList.add("hide");
+       z.classList.remove("hide");
+    }
+    </script>
