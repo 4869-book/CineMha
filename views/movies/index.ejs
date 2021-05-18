@@ -63,10 +63,10 @@
 	<div class="container pt-4 text-center">
 		<div class="btn-group btn-group-toggle " data-toggle="buttons">
 			<label class="btn btn-secondary active">
-			  <input type="radio" name="options" id="option1" autocomplete="off" checked> Now Showing
+			  <input type="radio" onclick="myFunction1()" checked> Now Showing
 			</label>
 			<label class="btn btn-secondary">
-			  <input type="radio" name="options" id="option2" autocomplete="off"> Coming Soon
+			  <input type="radio" onclick="myFunction2()" > Coming Soon
 			</label>
 		  </div>	
 	</div>
@@ -74,19 +74,13 @@
     <div class="wrapper">
         <div class="container py-1">
             <%- messages() %> 
-            <div class="row container-fluid mx-auto ">
-               <% collection.forEach(collection => { %> 
-                   <div class="card  movie_card mx-auto">
-                    <img src="<%= collection.poster %>" class="card-img-top mx-auto" alt="...">
-                        <div class="card-body">
-                            <a href="/movies/<%= collection._id %> "><i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="More Info"></i></a>
-                            <h5 class="card-title"><%= collection.name %></h5>
-                            <span class="movie_info"><%= collection.date %></span>
-                            <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span>
-                        </div>
-                    </div>
-                <% }); %>      
-            </div>		
+			<div class="" id="now">
+				<%- include('movies_patials/movie_list.ejs')  %> 
+			</div>
+	  
+			<div class="hide" id="comin">
+			  
+			</div> 		
         </div>
     </div>
 	
@@ -94,17 +88,21 @@
 
 </body>
 
-    
+<script>
+	function myFunction1() {
+       var x = document.getElementById("now");
+       var y = document.getElementById("comin");
+       x.classList.remove("hide");
+       y.classList.add("hide");
+    }
 
-	<script>
-	$(function(){
-        $('#messages').addClass('alert alert-success my-3');
-    })
-
-    $(function () {
-  		$('[data-toggle="tooltip"]').tooltip()
-	})
-	</script>
+    function myFunction2() {
+       var x = document.getElementById("now");
+       var y = document.getElementById("comin");
+       x.classList.add("hide");
+       y.classList.remove("hide");
+    }
+</script>
 
 </html>
 
