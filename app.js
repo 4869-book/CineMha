@@ -76,7 +76,7 @@ app.use('/news',newsRouter);
 // Specific folder example
 app.use('/images', express.static(__dirname + 'public/images'))
 app.use('/patials', express.static(__dirname + 'view/patials'))
-
+app.use(express.static('./public'));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -100,6 +100,9 @@ function isloggedin(req, res, next){
   res.redirect('/login');
 }
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 
 module.exports = app;

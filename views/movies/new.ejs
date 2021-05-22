@@ -14,22 +14,46 @@
         <div class="container">
             <h2 >Add New Movie</h2>
             <%= messages() %> 
-            <form action="/movies" method="post">
+            <form action="/movies" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="">Movie's Name</label>
-                    <input type="text" name="name" id="" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="">Movie's Poster</label>
-                    <input type="text" name="poster" id="" class="form-control" required>
+                    <input type="text" name="movie[name]" id="" class="form-control"  required>
                 </div>
                 <div class="form-group">
                     <label for="">Movie's Teaser</label>
-                    <input type="text" name="teaser" id="" class="form-control" required>
+                    <input type="text" name="movie[teaser]" id="" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Genre</label>
+                    <input type="text" name="movie[genre]" id="" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Rate</label>
+                    <input type="text" name="movie[rate]" id="" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Time</label>
+                    <input type="text" name="movie[time]" id="" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Synosis</label>
+                    <textarea name="movie[synosis]" id="" cols="30" rows="5" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Director</label>
+                    <input type="text" name="movie[director]" id="" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Cast&Crew</label>
+                    <input type="text" name="movie[cast]" id="" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Poster</label>
+                    <input type="file" name="poster" id="" class="form-control" accept="image/*" required>
                 </div>
                 <div class="form-group">
                     <label for="">Movie's Release Date</label>
-                    <input type="date" name="date" id="" class="form-control" required>
+                    <input type="date" name="movie[date]" id="" class="form-control" required>
                 </div>
                 <input type="submit" value="Submit" class="btn btn-primary my-2">
                 

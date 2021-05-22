@@ -5,11 +5,11 @@
              <div class="card-body">
                  <a href="/movies/<%= collection._id %> "><i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="More Info"></i></a>
                  <h5 class="card-title"><%= collection.name %></h5>
-                 <span class="movie_info"><%= collection.date %></span>
+                 <span class="movie_info"><%= collection.date.toISOString().slice(0, 10) %></span>
                  <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span>
              </div>
          </div>
-     <% }); %>      
+     <% }); %>    
  </div>
 
  <script>

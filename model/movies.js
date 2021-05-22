@@ -3,11 +3,14 @@ var mongoose = require('mongoose');
 var moviesSchema = new mongoose.Schema({
     name: String,
     poster: String,
-    date: String,
+    date: { type: Date, default: Date.toString },
     teaser: String,
     genre:String,
     rate:String,
-    time:String 
+    time:String,
+    synosis: String,
+    director: String,
+    cast: String 
 });
 
 module.exports = mongoose.model('Movie',moviesSchema);

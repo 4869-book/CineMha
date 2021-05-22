@@ -68,18 +68,34 @@
 			<label class="btn btn-secondary">
 			  <input type="radio" onclick="myFunction2()" > Coming Soon
 			</label>
-		  </div>	
+		  </div>
 	</div>
+	
 
     <div class="wrapper">
         <div class="container py-1">
             <%- messages() %> 
 			<div class="" id="now">
+				<div class="text-right">
+					<select class="form-select" aria-label="Default select example">
+						<option selected>Sort by</option>
+						<option value="1">Name</option>
+						<option value="2">Date</option>
+						<option value="3">Rating</option>
+					  </select>
+				</div>
 				<%- include('movies_patials/movie_list.ejs')  %> 
 			</div>
 	  
 			<div class="hide" id="comin">
-			  
+				<div class="text-right">
+					<select class="form-select" aria-label="Default select example">
+						<option selected>Sort by</option>
+						<option value="1">Name</option>
+						<option value="2">Date</option>
+						<option value="3">Rating</option>
+					  </select>
+				</div>
 			</div> 		
         </div>
     </div>
