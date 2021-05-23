@@ -25,6 +25,7 @@ var cinemasRouter = require('./routes/cinemas');
 var indexRouter = require('./routes/index');
 var promotionsRouter = require('./routes/promotions');
 var newsRouter = require('./routes/news');
+var accountRouter = require('./routes/account');
 
 var app = express();
 
@@ -72,6 +73,7 @@ app.use('/cinemas', cinemasRouter);
 app.use('/',indexRouter);
 app.use('/promotions', promotionsRouter);
 app.use('/news',newsRouter);
+app.use('/account',accountRouter);
 
 // Specific folder example
 app.use('/images', express.static(__dirname + 'public/images'))

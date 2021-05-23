@@ -1,5 +1,5 @@
 var express = require('express');
-var router  = express.Router();
+var router  = express.Router({mergeParams: true});
 var multer = require('multer');
 var path = require('path');
 var storage = multer.diskStorage({
@@ -18,6 +18,9 @@ var imageFilter = function (req, file, callback){
 };
 var upload  = multer({storage: storage, fileFilter: imageFilter});
 var Movie = require('../model/movies');
+var Comment = require('../model/comment');
+var middleware = require('../middleware');
+
 
 
 function getId(url) {
@@ -66,11 +69,33 @@ router.post('/',upload.single('poster'), function(req, res){
 
 
 router.get('/:id', function(req, res){
-  Movie.findById(req.params.id,function(err, foundMovie){
+  Movie.findById(req.params.id).populate('comments').exec(function(err, foundMovie){
+    if(err){
+        console.log(err);
+    } else {
+      res.render('movies/show.ejs', {collection: foundMovie});
+    }
+});
+});
+
+router.post('/:id', middleware.isLoggedIn, function(req, res){
+  Movie.findById(req.params.id, function(err, foundCollection){
       if(err){
           console.log(err);
+          res.redirect('/movies');
       } else {
-        res.render('movies/show.ejs', {collection: foundMovie});
+          Comment.create(req.body.comment, function(err, comment){
+              if(err) {
+                  console.log(err);
+              } else {
+                  comment.author.id = req.user._id;
+                  comment.author.username = req.user.username;
+                  comment.save();
+                  foundCollection.comments.push(comment);
+                  foundCollection.save();
+                  res.redirect('/movies/'+ foundCollection._id);
+              }
+          });
       }
   });
 });

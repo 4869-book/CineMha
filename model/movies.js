@@ -10,7 +10,13 @@ var moviesSchema = new mongoose.Schema({
     time:String,
     synosis: String,
     director: String,
-    cast: String 
+    cast: String,
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ] 
 });
 
 module.exports = mongoose.model('Movie',moviesSchema);

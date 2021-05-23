@@ -9,7 +9,8 @@
             <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 align-self-center ">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= collection.teaser %> " allowfullscreen></iframe>
-                  </div>
+                </div>
+
                 <div class="card my-5">
                     <div class="card-body">
                         <h4 class="card-title text-center"><%= collection.name  %></h4>
@@ -19,6 +20,10 @@
                         <h6 class="card-title"><img src="/images/images.png" width="50px" alt=""></h6>
                       </div>
                 </div>
+
+                
+                  <button type="button" class="btn btn-danger"><i class="fas fa-plus"></i> MY List</button>
+                
             </div>
           </div>       
             
@@ -38,6 +43,7 @@
           <label class="btn btn-secondary">
             <input type="radio" onclick="myFunction2()"> Reviews
           </label>
+          
         </div>
       </div>
       
