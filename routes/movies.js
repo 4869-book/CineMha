@@ -19,6 +19,7 @@ var imageFilter = function (req, file, callback){
 var upload  = multer({storage: storage, fileFilter: imageFilter});
 var Movie = require('../model/movies');
 var Comment = require('../model/comment');
+var Mylist = require('../model/mylist');
 var middleware = require('../middleware');
 
 
@@ -99,6 +100,10 @@ router.post('/:id', middleware.isLoggedIn, function(req, res){
       }
   });
 });
+
+
+
+
 
 
 

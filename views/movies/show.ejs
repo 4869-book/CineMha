@@ -21,8 +21,11 @@
                       </div>
                 </div>
 
-                
-                  <button type="button" class="btn btn-danger"><i class="fas fa-plus"></i> MY List</button>
+                  <form action="/account/<%= collection._id %> " method="post">
+                    <!-- <a class="btn btn-danger" href="/movies/<%= collection._id %>/addtolist"><i class="fas fa-plus"></i> MY List</a> -->
+                    <input class="btn btn-danger" type="submit"  value="MY List">
+                  </form>
+                 
                 
             </div>
           </div>       
