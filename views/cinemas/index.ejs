@@ -33,7 +33,7 @@
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h4 class="card-title"><%= collection.name %> </h4>
+                      <h4 class="card-title"><a href="/cinemas/<%= collection._id %>"><%= collection.name %></a> </h4>
                       <p class="card-text"><%= collection.location %> </p>
                       <% for(var i = 0 ; i<4;i++){ %>
                         <i class="fas fa-star"></i>

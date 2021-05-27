@@ -34,15 +34,23 @@ function getId(url) {
 }
 
 router.get('/', function(req, res, next) {
+  var mysort = {date:1};
+  if(req.query.sort=="Name"){
+    mysort = {name:1};
+  }else if(req.query.sort=="Date"){
+    mysort = {date:1};
+  }else if(req.query.sort=="Rating"){
+    mysort = {rating:1};
+  }
+
   Movie.find({},function(err, allMovies){
   if(err){
       console.log(err);
   } else {
-      res.render('movies/index.ejs', {collection: allMovies});
+      res.render('movies/index.ejs', {collection: allMovies, query: req.query});
+      //console.log(req.query.sort);
   }
-  }).sort({
-    date: 1,
-  })
+  }).sort(mysort);
 });
 
 router.get('/new', function(req, res ,next) {
@@ -74,7 +82,7 @@ router.get('/:id', function(req, res){
     if(err){
         console.log(err);
     } else {
-      res.render('movies/show.ejs', {collection: foundMovie});
+      res.render('movies/show.ejs', {collection: foundMovie, query: req.query});
     }
 });
 });
@@ -94,7 +102,7 @@ router.post('/:id', middleware.isLoggedIn, function(req, res){
                   comment.save();
                   foundCollection.comments.push(comment);
                   foundCollection.save();
-                  res.redirect('/movies/'+ foundCollection._id);
+                  res.redirect('/movies/'+ foundCollection._id + "?path=review");
               }
           });
       }

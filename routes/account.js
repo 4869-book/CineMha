@@ -10,7 +10,7 @@ router.get('/',middleware.isLoggedIn, function(req, res, next) {
         if(err){
             console.log(err);
         } else {
-            res.render('account/index.ejs',{collection: foundMylist });
+            res.render('account/index.ejs',{collection: foundMylist, query: req.query });
         }
     });  
 });
@@ -21,14 +21,13 @@ router.post('/:id', middleware.isLoggedIn, function(req, res){
           console.log(err);
           res.redirect('/movies');
       } else {
-        
-          Mylist.create({movie_id: req.params.id} , function(err, mylist){
+          Mylist.create({movie_id: req.params.id, movie_name: req.query.name, movie_poster: req.query.poster} , function(err, mylist){
               if(err) {
                   console.log(err);
               } else {
                 foundCollection.mylists.push(mylist);
                 foundCollection.save();
-                res.redirect('/account');
+                res.redirect('/account?path=mylist');
               }
           });
       }

@@ -10,7 +10,7 @@
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= collection.teaser %> " allowfullscreen></iframe>
                 </div>
-
+                 
                 <div class="card my-5">
                     <div class="card-body">
                         <h4 class="card-title text-center"><%= collection.name  %></h4>
@@ -21,9 +21,9 @@
                       </div>
                 </div>
 
-                  <form action="/account/<%= collection._id %> " method="post">
+                  <form action="/account/<%= collection._id %>?name=<%= collection.name %>&poster=<%= collection.poster %>  " method="post">
                     <!-- <a class="btn btn-danger" href="/movies/<%= collection._id %>/addtolist"><i class="fas fa-plus"></i> MY List</a> -->
-                    <input class="btn btn-danger" type="submit"  value="MY List">
+                    <input class="btn btn-danger" type="submit"  value='+MY List'>
                   </form>
                  
                 
@@ -37,61 +37,66 @@
     <div class="container py-3 ">
       <div class="text-center">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-secondary active">
-            <input type="radio" onclick="myFunction3()"> Showtime
+          <label class="btn btn-secondary">
+            <!-- <input type="radio" onclick="myFunction3()"> Showtime -->
+            <a class="btn radio" href="?path=showtime"><h5>Showtime</h5></a>
           </label>
           <label class="btn btn-secondary">
-            <input onclick="myFunction1()" type="radio"  checked> Infomations
+            <!-- <input onclick="myFunction1()" type="radio"  checked> Infomations -->
+            <a class="btn radio" href="?path=infomation"><h5>Infomations</h5></a>
           </label>
           <label class="btn btn-secondary">
-            <input type="radio" onclick="myFunction2()"> Reviews
+            <!-- <input type="radio" onclick="myFunction2()"> Reviews -->
+            <a class="btn radio" href="?path=review"><h5>Reviews</h5></a>
           </label>
           
         </div>
       </div>
       
-      <div class="" id="info">
-          <%- include('movies_patials/info.ejs')  %> 
-      </div>
-
-      <div class="hide" id="rev">
-        <%- include('movies_patials/reviews.ejs')  %> 
-      </div>
-
-      <div class="hide" id="show">
-        <%- include('movies_patials/showtimes.ejs')  %> 
-      </div>
-
+      <% if(query.path){  %>
+        <% if(query.path=="infomation") {  %>
       
+        <%- include('movies_patials/info.ejs')  %> 
+      
+        <% }else if(query.path=="review"){ %> 
+      
+        <%- include('movies_patials/reviews.ejs')  %> 
+      
+        <% }else if(query.path=="showtime"){ %> 
+      
+        <%- include('movies_patials/showtimes.ejs')  %> 
+      
+
+      <% }}; %> 
 
     </div>
   </div>  
 
   <script>
-    function myFunction1() {
-       var x = document.getElementById("info");
-       var y = document.getElementById("rev");
-       var z = document.getElementById("show");
-       x.classList.remove("hide");
-       y.classList.add("hide");
-       z.classList.add("hide");
-    }
+    // function myFunction1() {
+    //    var x = document.getElementById("info");
+    //    var y = document.getElementById("rev");
+    //    var z = document.getElementById("show");
+    //    x.classList.remove("hide");
+    //    y.classList.add("hide");
+    //    z.classList.add("hide");
+    // }
 
-    function myFunction2() {
-       var x = document.getElementById("info");
-       var y = document.getElementById("rev");
-       var z = document.getElementById("show");
-       x.classList.add("hide");
-       y.classList.remove("hide");
-       z.classList.add("hide");
-    }
+    // function myFunction2() {
+    //    var x = document.getElementById("info");
+    //    var y = document.getElementById("rev");
+    //    var z = document.getElementById("show");
+    //    x.classList.add("hide");
+    //    y.classList.remove("hide");
+    //    z.classList.add("hide");
+    // }
 
-    function myFunction3() {
-       var x = document.getElementById("info");
-       var y = document.getElementById("rev");
-       var z = document.getElementById("show");
-       x.classList.add("hide");
-       y.classList.add("hide");
-       z.classList.remove("hide");
-    }
+    // function myFunction3() {
+    //    var x = document.getElementById("info");
+    //    var y = document.getElementById("rev");
+    //    var z = document.getElementById("show");
+    //    x.classList.add("hide");
+    //    y.classList.add("hide");
+    //    z.classList.remove("hide");
+    // }
     </script>

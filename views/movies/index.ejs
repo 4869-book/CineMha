@@ -77,24 +77,34 @@
             <%- messages() %> 
 			<div class="" id="now">
 				<div class="text-right">
-					<select class="form-select" aria-label="Default select example">
-						<option selected>Sort by</option>
-						<option value="1">Name</option>
-						<option value="2">Date</option>
-						<option value="3">Rating</option>
-					  </select>
+					<div class="dropdown">
+						<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Sort by : <%= query.sort %> 
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="">Select</a>
+						  	<a class="dropdown-item" href="?sort=Name">Name</a>
+						 	<a class="dropdown-item" href="?sort=Date">Date</a>
+						  	<a class="dropdown-item" href="?sort=Rating">Rating</a>
+						</div>
+					  </div>
 				</div>
 				<%- include('movies_patials/movie_list.ejs')  %> 
 			</div>
 	  
 			<div class="hide" id="comin">
 				<div class="text-right">
-					<select class="form-select" aria-label="Default select example">
-						<option selected>Sort by</option>
-						<option value="1">Name</option>
-						<option value="2">Date</option>
-						<option value="3">Rating</option>
-					  </select>
+					<div class="dropdown">
+						<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Sort by : <%= query.sort %> 
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="">Select</a>
+						  	<a class="dropdown-item" href="?sort=Name">Name</a>
+						  	<a class="dropdown-item" href="?sort=Date">Date</a>
+						  	<a class="dropdown-item" href="?sort=Rating">Rating</a>
+						</div>
+					  </div>
 				</div>
 			</div> 		
         </div>

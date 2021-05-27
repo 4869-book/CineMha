@@ -34,4 +34,14 @@ router.get('/new', function(req, res, next) {
     })
   })
 
+  router.get('/:id', function(req, res, next) {
+    Cinema.findById(req.params.id).exec(function(err, allCinema){
+      if(err){
+          console.log(err);
+      } else {
+          res.render('cinemas/show.ejs', {collection: allCinema});
+      }
+      })
+   });
+
   module.exports = router;
