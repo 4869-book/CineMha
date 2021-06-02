@@ -1,5 +1,23 @@
-var express = require('express');
-var router  = express.Router();
+var express = require('express'),
+    router  = express.Router(),
+    multer  = require('multer'),
+    path    = require('path');
+var storage = multer.diskStorage({
+      destination: function(req, file, callback){
+      callback(null,'./public/uploads/cinema');
+    },
+      filename: function(req, file, callback){
+      callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+      }
+  });
+var imageFilter = function (req, file, callback){
+if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+return callback(new Error('Only JPG, jpeg, PNGm and GIF image files are allowed!'), false);
+}
+callback(null, true);
+};
+var  upload = multer({storage: storage, fileFilter: imageFilter});
+
 var Cinema = require('../model/cinemas');
 
 router.get('/', function(req, res, next) {
@@ -16,14 +34,10 @@ router.get('/new', function(req, res, next) {
     res.render('cinemas/new.ejs')
   });
 
-  router.post('/',function(req, res){
-    var name = req.body.name;
-    var location = req.body.location;
-    var city = req.body.city;
-    var picture = req.body.picture;
-  
-    var newCinema = {name:name, location:location, city:city,picture:picture};
-    Cinema.create(newCinema, function(err, newlyCreated){
+  router.post('/',upload.single('picture'), function(req, res){
+    req.body.collection.picture = '/uploads/cinema/'+req.file.filename;
+    
+    Cinema.create(req.body.collection, function(err, newlyCreated){
       if(err){
         console.log(err);
       }else{
@@ -39,7 +53,7 @@ router.get('/new', function(req, res, next) {
       if(err){
           console.log(err);
       } else {
-          res.render('cinemas/show.ejs', {collection: allCinema});
+          res.render('cinemas/show.ejs', {collection: allCinema,query: req.query});
       }
       })
    });

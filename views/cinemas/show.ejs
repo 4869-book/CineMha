@@ -1,1 +1,89 @@
 <%- include('../patials/nav-bar.ejs')  %>
+<div class="wrapper">
+    <div class="container ">
+       
+        <div class="row py-3 mx-auto">
+            <div class="col-sm-5 col-md-6 align-self-center">
+                <img class="img-fluid " style="width: 30rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="<%= collection.picture %> " alt="">
+            </div>
+            <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 align-self-center ">
+                 
+                <div class="card my-5">
+                    <div class="card-body">
+                        <h4 class="card-title text-center"><%= collection.name  %></h4>
+                        <br>
+                        <h6 class="card-title"><i class="fas fa-location-arrow">&nbsp&nbsp</i>Location&nbsp: <%= collection.location %> </h6>
+                        <br>
+                        <h6 class="card-title"><i class="fas fa-video">&nbsp&nbsp</i><%= collection.theater  %>  Theaters </h6>
+                      </div>
+                </div>
+                
+            </div>
+          </div>       
+            
+  </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="container py-3 ">
+      <div class="text-center">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary">
+            <!-- <input type="radio" onclick="myFunction3()"> Showtime -->
+            <a class="btn radio" href="?path=showtime"><h5>Showtime</h5></a>
+          </label>
+          
+          
+          
+        </div>
+      </div>
+      
+      <%- include('cinema_patials/showtimes.ejs')  %> 
+      
+      <!-- <% if(query.path){  %>
+        <% if(query.path=="infomation") {  %>
+      
+        <%- include('cinema_patials/info.ejs')  %> 
+      
+        <% }else if(query.path=="review"){ %> 
+      
+        <%- include('cinema_patials/reviews.ejs')  %> 
+      
+        <% }else if(query.path=="showtime"){ %> 
+      
+        
+      
+
+      <% }}; %>  -->
+
+    </div>
+  </div>  
+
+  <script>
+    // function myFunction1() {
+    //    var x = document.getElementById("info");
+    //    var y = document.getElementById("rev");
+    //    var z = document.getElementById("show");
+    //    x.classList.remove("hide");
+    //    y.classList.add("hide");
+    //    z.classList.add("hide");
+    // }
+
+    // function myFunction2() {
+    //    var x = document.getElementById("info");
+    //    var y = document.getElementById("rev");
+    //    var z = document.getElementById("show");
+    //    x.classList.add("hide");
+    //    y.classList.remove("hide");
+    //    z.classList.add("hide");
+    // }
+
+    // function myFunction3() {
+    //    var x = document.getElementById("info");
+    //    var y = document.getElementById("rev");
+    //    var z = document.getElementById("show");
+    //    x.classList.add("hide");
+    //    y.classList.add("hide");
+    //    z.classList.remove("hide");
+    // }
+    </script>

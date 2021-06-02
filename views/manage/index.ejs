@@ -1,0 +1,40 @@
+<%- include('../patials/nav-bar.ejs')  %>
+
+    <div class="container py-3 text-center">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Movie Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="?path=allMovie">All Movies</a>
+                <a class="dropdown-item" href="?path=newMovie">Add new Movie</a>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cinema Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="">All Cinemas</a>
+                <a class="dropdown-item" href="?path=newCinema">Add new Cinema</a>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                User Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="">All Users</a>
+            </div>
+        </div>
+    </div>
+
+    <% if(query.path == 'newMovie') {%> 
+        <%- include('manage_patials/new_movie.ejs')%>
+    <% }else if(query.path == 'newCinema') { %>
+        <%- include('manage_patials/new_cinema.ejs')%>
+    <% }else if(query.path == 'allMovie') { %>
+        <%- include('manage_patials/datatable.ejs')%>
+    <% } %> 

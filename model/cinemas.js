@@ -4,7 +4,14 @@ var cinemasSchema = new mongoose.Schema({
     name: String,
     location: String,
     city: String,
-    picture: String 
+    theater: String,
+    picture: String,
+    showtimes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Showtime'
+        }
+    ] 
 });
 
 module.exports = mongoose.model('Cinema',cinemasSchema);

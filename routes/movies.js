@@ -16,6 +16,7 @@ var imageFilter = function (req, file, callback){
   }
   callback(null, true);
 };
+
 var upload  = multer({storage: storage, fileFilter: imageFilter});
 var Movie = require('../model/movies');
 var Comment = require('../model/comment');
@@ -60,11 +61,7 @@ router.get('/new', function(req, res ,next) {
 router.post('/',upload.single('poster'), function(req, res){
   req.body.movie.poster = '/uploads/'+req.file.filename;
   req.body.movie.teaser = getId(req.body.movie.teaser);
-  // var name = req.body.name;
-  // var poster = req.body.poster;
-  // var teaser = getId(req.body.teaser);
-  // var date = req.body.date;mo
-  //var newMovie = {name:name, poster:poster, date:date,teaser:teaser};
+  
   Movie.create(req.body.movie, function(err, newlyCreated){
     if(err){
       console.log(err);

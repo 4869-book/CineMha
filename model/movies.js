@@ -16,6 +16,12 @@ var moviesSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment'
         }
+    ],
+    showtimes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Showtime'
+        }
     ] 
 });
 
