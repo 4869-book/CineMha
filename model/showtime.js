@@ -13,9 +13,10 @@ var showtimeSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'cinema'
         },
-        name: String
+        name: String,
+        theater: String
     },
     time: String
 });
 
-module.exports = mongoose.model('Showtime',showtimeSchema);
+module.exports = mongoose.model('Showtime',showtimeSchema); 

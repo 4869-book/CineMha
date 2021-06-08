@@ -1,0 +1,107 @@
+
+
+
+    <div  class="container">
+
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header " id="headingOne">
+            
+            <!-- <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">
+              Collapsible Group Item #<%= i  %>
+            </button> -->
+            <div class="row">
+              <div class="col-1"><h6>#</h6></div>
+              <div class="col-5"><h6>Name</h6></div>
+              
+            </div>
+          
+        </div>
+        </div>
+        <% var i=1 %> 
+        <% allCinema.forEach(allCinema => { %>
+        <div class="card">
+          <div class="card-header " id="headingOne">
+            
+              <!-- <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">
+                Collapsible Group Item #<%= i  %>
+              </button> -->
+              <div class="row">
+                <div class="col-1"><h6><%=i %></h6></div>
+                <div class="col-5"><a class="text-dark" href="/movies/<%= allCinema._id %>?path=showtime"><%= allCinema.name %></a> </div>
+                <div class="col-4 ">
+                  <div class="button-groub">
+                    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">Showtime</button>
+                    
+                    <button class="btn btn-danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+      
+          <div id="collapseOne<%= i++ %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <form class="form-inline" action="/manage/cinema/<%= allCinema._id %> " method="post">
+              
+                    <div class="form-group mr-sm-2">
+                      <label for="">Movie : </label>
+                      <select class="form-control" name="showtime[movie]" id="">
+                          <option selected>select</option>
+                          <% allMovie.forEach(allMovie => { %>
+                            <option value="<%= allMovie._id  %>"><%= allMovie.name  %> </option>       
+                          <% }) %> 
+                        </select>
+                    </div>
+
+                    <div class="form-group mr-sm-2">
+                      <label for="">Theater : </label>
+                      <select class="form-control" name="showtime[theater]" id="">
+                          <option selected>select</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+
+                  </div>
+        
+                    <div class="form-group">
+                        <label for="">Time : </label>
+                        <input class="form-control mr-sm-2" type="time" name="showtime[time]" id="">
+                    </div>
+
+                    <button class="btn btn-success">Add New</button>
+                  </form>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <h3>Cinema</h3>
+                  <p>Theater 1</p>
+                  <% allCinema.showtimes.forEach(function(showtimes){  %>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-info"><%= showtimes.time %> </button>
+                      <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </div>      
+                  <% }); %> 
+                  
+                </div>
+
+
+              </div>
+            </div>
+            
+            
+
+          </div>
+          
+        </div>
+        <% }) %>
+      </div>
+
+</div>
+

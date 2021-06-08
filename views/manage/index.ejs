@@ -16,7 +16,7 @@
                 Cinema Manager
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="">All Cinemas</a>
+                <a class="dropdown-item" href="?path=allCinema">All Cinemas</a>
                 <a class="dropdown-item" href="?path=newCinema">Add new Cinema</a>
             </div>
         </div>
@@ -36,5 +36,9 @@
     <% }else if(query.path == 'newCinema') { %>
         <%- include('manage_patials/new_cinema.ejs')%>
     <% }else if(query.path == 'allMovie') { %>
-        <%- include('manage_patials/datatable.ejs')%>
+        <%- include('manage_patials/movies_table.ejs')%>
+    <% }else if(query.path == 'allCinema') { %>
+        <%- include('manage_patials/cinemas_table.ejs')%>
     <% } %> 
+
+    

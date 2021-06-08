@@ -27,6 +27,8 @@ var promotionsRouter = require('./routes/promotions');
 var newsRouter = require('./routes/news');
 var accountRouter = require('./routes/account');
 var manageRouter = require('./routes/manage');
+var bookingRouter = require('./routes/booking');
+
 
 var app = express();
 
@@ -76,6 +78,9 @@ app.use('/promotions', promotionsRouter);
 app.use('/news',newsRouter);
 app.use('/account',accountRouter);
 app.use('/manage',manageRouter);
+app.use('/booking',bookingRouter);
+
+
 
 // Specific folder example
 app.use('/images', express.static(__dirname + 'public/images'))
