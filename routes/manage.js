@@ -8,26 +8,7 @@ var Showtime = require('../model/showtime')
 var middleware = require('../middleware');
 
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   Movie.find({},function(err,allMovie){
-//     if(err){
-//       console.log(err);
-//     }else {
-//       Cinema.find({},function(err,allCinema){
-//         if(err){
-//           console.log(err);
-//         }else {
-//           res.render('manage/index.ejs', {query: req.query, allMovie:allMovie, allCinema:allCinema});
-//         }
-//       }).sort({
-//         name:1
-//       })
-//     }
-//   }).sort({
-//     name:1
-//   })
-// });
+
 
 router.get('/', function(req, res){
   Movie.find({}).sort({name:1}).populate('showtimes').exec(function(err, allMovie){
@@ -47,7 +28,7 @@ router.get('/', function(req, res){
 
 router.post('/movie/:id', middleware.isLoggedIn, function(req, res){
   Movie.findById(req.params.id, function(err, foundMovie){
-      if(err){
+      if(err){                                                
           console.log(err);
           res.redirect('/manage');
       } else {

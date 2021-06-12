@@ -7,6 +7,7 @@ var bodyParser = require('body-parser')
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var User = require('./model/user');
+var methodOverride = require('method-override')
 
 // getting-started.js
 const mongoose = require('mongoose');
@@ -56,6 +57,8 @@ app.use(function(req, res, next){
   res.locals.currentUser = req.user;
   next();
 });
+
+app.use(methodOverride('_method'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

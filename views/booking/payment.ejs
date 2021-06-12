@@ -1,0 +1,49 @@
+
+<!-- <h2><%= seat.id %> </h2>
+<h2><%= seat.name %> </h2>
+<h2><%= seat.location %> </h2>
+<h2><%= seat.seat %> </h2>
+<h2><%= seat.total %> </h2> -->
+
+<%- include('../patials/nav-bar.ejs')  %>
+
+<div class="wrapper">
+  <div class="container ">
+     
+      <div class="row py-3 mx-auto">
+          <div class="col-sm-5 col-md-6 align-self-center">
+              <img class="img-fluid " style="width: 30rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="<%= foundMovie.poster %> " alt="">
+          </div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 align-self-center ">
+              <!-- <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= foundMovie.teaser %> " allowfullscreen></iframe>
+              </div> -->
+                <div class="card my-5">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">Payment</h4>
+                    </div>
+                </div>
+
+                <div class="card my-5">
+                    <div class="card-body">
+                        <h4 class="card-title text-center"><%= foundMovie.name  %></h4>
+                        <h6 class="card-title"><i class="fas fa-eye">&nbsp&nbsp</i><%= foundShowtime.time %></h6>
+                        <h6 class="card-title"><i class="fas fa-map-marker-alt">&nbsp&nbsp</i> <%= foundShowtime.cinema.name %></h6>
+                        <h6 class="card-title"><i class="fas fa-stopwatch">&nbsp&nbsp&nbsp</i><%= foundShowtime.time %></h6>
+                        <h6 class="card-title"><i class="fas fa-door-open">&nbsp&nbsp</i>Theater <%= foundShowtime.cinema.theater %></h6>
+                    </div>
+                </div>
+              
+                <div class="card my-5">
+                    <div class="card-body">
+                        <h6 class="card-title"><i class="fas fa-chair">&nbsp&nbsp</i>Selected Seat : <%= seat.seat %></h6>
+                        <h6 class="card-title"><i class="fas fa-money-bill-alt">&nbsp&nbsp</i>Total : <%= seat.total %> THB</h6>
+                          
+                    </div>
+                </div>
+
+          </div>
+        </div>       
+          
+</div>
+</div>

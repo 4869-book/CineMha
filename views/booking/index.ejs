@@ -1,57 +1,171 @@
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel='stylesheet' href='/stylesheets/style2.css' />
 <%- include('../patials/nav-bar.ejs')  %>
 <div class="wrapper">
-    <div class="container ">
-       
-        <div class="row py-3 mx-auto">
-            <div class="col-sm-5 col-md-6 align-self-center">
-                <img class="img-fluid " style="width: 30rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="<%= foundMovie.poster %> " alt="">
-            </div>
-            <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 align-self-center ">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= foundMovie.teaser %> " allowfullscreen></iframe>
-                </div>
-                 
-                <div class="card my-5">
-                    <div class="card-body">
-                        <h4 class="card-title text-center"><%= foundMovie.name  %></h4>
-                        <h6 class="card-title"><i class="fas fa-tags">&nbsp&nbsp</i>Genre&nbsp: <%= foundMovie.genre %></h6>
-                        <h6 class="card-title"><i class="fas fa-eye">&nbsp&nbsp</i>Rate&nbsp&nbsp&nbsp&nbsp: <%= foundMovie.rate %></h6>
-                        <h6 class="card-title"><i class="fas fa-stopwatch">&nbsp&nbsp&nbsp</i>Time&nbsp&nbsp&nbsp: <%= foundMovie.time %> Mins</h6>
-                        <h6 class="card-title"><img src="/images/images.png" width="50px" alt=""></h6>
-                      </div>
-                </div>
-                 
-                
-            </div>
-          </div>       
-            
-  </div>
-  </div>
- 
+  <div class="container ">
+     
+      <div class="row py-3 mx-auto">
+          <div class="col-sm-5 col-md-6 align-self-center">
+              <img class="img-fluid " style="width: 30rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="<%= foundMovie.poster %> " alt="">
+          </div>
+          <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0 align-self-center ">
+              <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= foundMovie.teaser %> " allowfullscreen></iframe>
+              </div>
+               
+              <div class="card my-5">
+                  <div class="card-body">
+                      <h4 class="card-title text-center"><%= foundMovie.name  %></h4>
+                      <h6 class="card-title"><i class="fas fa-tags">&nbsp&nbsp</i>Genre&nbsp: <%= foundMovie.genre %></h6>
+                      <h6 class="card-title"><i class="fas fa-eye">&nbsp&nbsp</i>Rate&nbsp&nbsp&nbsp&nbsp: <%= foundMovie.rate %></h6>
+                      <h6 class="card-title"><i class="fas fa-stopwatch">&nbsp&nbsp&nbsp</i>Time&nbsp&nbsp&nbsp: <%= foundMovie.time %> Mins</h6>
+                      <h6 class="card-title"><img src="/images/images.png" width="50px" alt=""></h6>
+                    </div>
+              </div>
+               
+              
+          </div>
+        </div>       
+          
+</div>
+</div>
+
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-9 text-center">
-        <% var seat="ABCDEFGHIJKLMNOPQRSTUVWXYZ" %> 
-          <% for(var x=0;x<12;x++){ %>
-            <span><%= seat[x] %></span>
-            <% for(var y=0;y<12;y++){ %>
-            <i class="fas fa-chair fa-3x px-1"></i> 
-            <% }; %>
-              <br>
-          <% }; %>
-        
+      
+      <div class="col-9 my-3 text-center">
+
+        <div class="row">
+          <div class="col">
+            <i class="fas fa-chair fa-2x"></i>
+            <div class="text">
+              <h6>Special Deluxe</h6>
+              <h6>100 THB</h6>
+            </div>
+          </div>
+          <div class="col">
+            <i class="fas fa-chair fa-2x premium"></i>
+            <div class="text">
+              <h6>Special Premium</h6>
+              <h6>160 THB</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen"><h2>SCREEN</h2></div>
+        <br>
+          <% var seat="ABCDEFGHIJKLMNOPQRSTUVWXYZ" %> 
+          <% for(var x=12;x>=0;x--){%>
           
+            <div class="btn-group">
+              <h4><%= seat[x]%></h4><button class="btn " disabled value="(1,1)"></button>
+              <% for(var y=1;y<=13;y++){%>
+                  <% if(x<=3){ %>
+                    <button type="button" id="" value="<%= seat[x]+y %> "  class="btn seat fas fa-chair fa-2x premium "></button>
+                  <% }else { %>
+                    <button type="button" value="<%= seat[x]+y %> " class="btn seat fas fa-chair fa-2x deluxe"></button>
+                  <% } %>    
+              <% } %> 
+            </div>
+          <% } %>
+
       </div>
-      <div class="col-3 bg-warning">
-        
+      <div class="col-3 my-3">
+        <div class="card ">
+          <div class="card-header text-center">
+              <h4 >Booking</h4>
+          </div>
+          <div class="card-body">
+            
+            <h5><%= foundShowtime.movie.name %> </h5>
+            <h5><%= foundShowtime.time %> </h5>
+            <h5>CINEMA <%= foundShowtime.cinema.theater %> </h5>
+            <h5><%= foundShowtime.cinema.name %> </h5>
+            <h5>Select Seat : <span id="results">-</span> </h5>
+            <h5>Total : <span id="price"> 0 </span> THB</h5>
+            
+          </div>
+        </div>
+
+        <form action="/booking/payment/<%= foundShowtime._id %>" method="post">
+          <input type="hidden" name="booking[showtime_id]"> 
+          <input type="hidden" name="booking[name]" value="<%= foundShowtime.movie.name %>">
+          <input type="hidden" name="booking[day]">
+          <input type="hidden" name="booking[location] " value="<%= foundShowtime.cinema.theater %>">
+          <input type="hidden" name="booking[seat][]" id="results2">
+          <input type="hidden" name="booking[total]" id="price2">
+          <input type="submit" class="btn btn-success" value="submit">
+        </form>
+
       </div>
     </div>
+    
   </div>
 </div>
 
+
+<div class="credits"><a href="http://www.aniket.co" target="_blank">aniket.co</a></div>
+
 <script>
-$('.fa-chair').click(function() {
-    $(this).toggleClass('fa-check-circle'); 
+
+const container = document.querySelector('.col-9');
+const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+const total = document.getElementById('total');
+const price2 = document.getElementById('price2');
+const results2 = document.getElementById('results2');
+const movieSelect = document.getElementById('movie');
+
+// let ticketPrice = +movieSelect.value;
+
+//Update total and count
+function updateSelectedCount() {
+  const selectedSeats1 = document.querySelectorAll('.premium.selected');
+  const selectedSeats2 = document.querySelectorAll('.deluxe.selected');
+  const selectedSeatsCount1 = (selectedSeats1.length);
+  const selectedSeatsCount2 = (selectedSeats2.length);
+  console.log(selectedSeatsCount1+' '+selectedSeatsCount2)
+  $('#price').text((selectedSeatsCount1*160)+(selectedSeatsCount2*100));
+  price2.value=(selectedSeatsCount1*160)+(selectedSeatsCount2*100)
+  // total.innerText = selectedSeatsCount * 100;
+}
+
+
+//Seat click event
+container.addEventListener('click', e => {
+  var price;
+  if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+    e.target.classList.toggle('selected');
+    e.target.classList.toggle('fa-check-circle');
+    e.target.classList.toggle('bg-danger');
+  }
+  if(e.target.classList.contains('premium')) {
+    price = 160
+    
+  }else{
+    price = 100;
+  }
+  updateSelectedCount();
+});
+
+var items = [];
+
+
+
+
+
+$(".btn-group button").on('click', function(e){
+  var indexOfElement = items.indexOf(e.target.value);
+  //value is not in the array
+  if (indexOfElement < 0) {
+    items.push(e.target.value);
+    
+  } else {
+    //value is in the array, remove it
+    items.splice(indexOfElement, 1);
+  }
+  
+  $('#results').text(items);
+  results2.value=items;
 });
 </script>

@@ -1,5 +1,9 @@
 <div class="row pt-3 mx-auto">
-  <% collection.comments.forEach(function(comment){ %>    
+  <% var flag=0 %> 
+  <% collection.comments.forEach(function(comment){ %>
+    <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+      <% flag=1 %> 
+      <% } %>      
   <div class="col-sm-5 col-md-6">
        
         <div class="card mt-2">
@@ -12,22 +16,25 @@
     </div>
     <% }); %>
   </div>
+                  
+
+  <% if(flag==0){ %>
+    <div class="pt-3 px-3">
+
+      <h5>Your Review Here</h5>
   
-  <div class="pt-3 px-3">
-
-    <h5>Your Review Here</h5>
-
-    <form action='/movies/<%= collection._id %>' method="post">
-      <div class="form-group">
-        <textarea class="form-control" name="comment[text]" id="" cols="20" rows="5"></textarea>
-      </div>
-
-      <div class="form-group text-right">
-        <input type="submit" value="Post" class="btn btn-primary my-2 ">
-      </div>
+      <form action='/movies/<%= collection._id %>' method="post">
+        <div class="form-group">
+          <textarea class="form-control" name="comment[text]" id="" cols="20" rows="5"></textarea>
+        </div>
+  
+        <div class="form-group text-right">
+          <input type="submit" value="Post" class="btn btn-primary my-2 ">
+        </div>
+        
+      </form>
+        
       
-    </form>
-      
-    
-  </div>
+    </div>
+    <% } %>  
   

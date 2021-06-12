@@ -1,0 +1,76 @@
+
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
+
+
+.selected { 
+  color: rgb(207, 10, 43);
+}
+
+.occupied {
+  background-color: #fff;
+}
+
+/* add walkline here */
+/* .seat:nth-of-type(2) {
+  margin-right: 18px;
+}
+
+.seat:nth-last-of-type(2) {
+  margin-left: 18px;
+} */
+
+.seat:not(.occupied):hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+
+.showcase .seat:not(.occupied):hover {
+  cursor: default;
+  transform: scale(1);
+}
+
+
+
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.showcase li small {
+  margin-left: 2px;
+}
+
+
+
+.screen {
+  
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  height: 70px;
+  width: 100%;
+  transform: rotateX(-45deg);
+  box-shadow: 0 3px 10px rgba(255,255,255,0.7);
+}
+
+p.text {
+  margin: 40px 0;
+}
+
+p.text span {
+  color: #0081cb;
+  font-weight: 600;
+  box-sizing: content-box;
+}
+
+.credits a {
+  color: #fff;
+}
+
+.seat.premium,.premium {
+  color: #0081cb
+  ;
+}

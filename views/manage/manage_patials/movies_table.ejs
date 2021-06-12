@@ -34,7 +34,13 @@
                       <div class="button-groub">
                         <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">Showtime</button>
                         
-                        <button class="btn btn-danger">Delete</button>
+                        <!-- <button class="btn btn-warning">Edit</button> -->
+                        <a class="btn btn-warning" href="movies/<%= allMovie._id %>/edit/">Edit</a>
+                        
+                          <form style="display: inline;" action="/movies/<%= allMovie._id %>?_method=DELETE" method="post">
+                            <button class="btn btn-danger">Delete</button>
+                          </form>
+                        
                       </div>
                     </div>
                   </div>

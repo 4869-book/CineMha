@@ -22,6 +22,7 @@ var Movie = require('../model/movies');
 var Comment = require('../model/comment');
 var Mylist = require('../model/mylist');
 var middleware = require('../middleware');
+const { move } = require('./manage');
 
 
 
@@ -106,6 +107,39 @@ router.post('/:id', middleware.isLoggedIn, function(req, res){
   });
 });
 
+router.get('/:id/edit',function(req,res){
+  Movie.findById(req.params.id).exec(function(err,editThis){
+    if(err){
+      console.log(err);
+    }else{
+      res.render('manage/edit_movie.ejs',{editThis:editThis});
+    }
+  })
+})
+
+router.put('/:movie_id',upload.single('poster'),function(req, res){
+  if(req.file){
+    req.body.movie.poster = '/uploads/'+req.file.filename;
+  }
+  Movie.findByIdAndUpdate(req.params.movie_id, req.body.movie, function(err,updateMovie){
+    if(err){
+      res.redirect('/manage?path=allMovie');
+    }else{
+      req.flash("error","Edit Movie Sucessfully!");                                                 
+      res.redirect('/movies/'+req.params.movie_id);
+    }
+  });
+});
+
+router.delete('/:movie_id',function(req, res){
+  Movie.findByIdAndRemove(req.params.movie_id, function(err){
+    if(err){
+      res.redirect('/manage'+'?path=allMovie');
+    }else {
+      res.redirect('/manage?path=allMovie');
+    }
+  })
+})
 
 
 
