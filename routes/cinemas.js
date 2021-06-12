@@ -19,6 +19,7 @@ callback(null, true);
 var  upload = multer({storage: storage, fileFilter: imageFilter});
 
 var Cinema = require('../model/cinemas');
+var Movie = require('../model/movies');
 
 router.get('/', function(req, res, next) {
  Cinema.find({},function(err, allCinema){
@@ -49,11 +50,17 @@ router.get('/new', function(req, res, next) {
   })
 
   router.get('/:id', function(req, res, next) {
-    Cinema.findById(req.params.id).exec(function(err, allCinema){
+    Cinema.findById(req.params.id).populate('showtimes').exec(function(err, allCinema){
       if(err){
           console.log(err);
       } else {
-          res.render('cinemas/show.ejs', {collection: allCinema,query: req.query});
+        Movie.find({}).sort({name:1}).populate('showtimes').exec(function(err, foundMovie){
+          if(err){
+              console.log(err);
+          } else {
+              res.render('cinemas/show.ejs', {collection: allCinema,foundMovie:foundMovie,query: req.query});
+          }
+          })
       }
       })
    });

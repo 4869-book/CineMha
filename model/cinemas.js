@@ -11,7 +11,7 @@ var cinemasSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Showtime'
         }
-    ] 
+    ]
 });
 
 module.exports = mongoose.model('Cinema',cinemasSchema);

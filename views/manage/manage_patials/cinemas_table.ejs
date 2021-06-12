@@ -82,14 +82,21 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <h3>Cinema</h3>
-                  <p>Theater 1</p>
-                  <% allCinema.showtimes.forEach(function(showtimes){  %>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-info"><%= showtimes.time %> </button>
-                      <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                    </div>      
-                  <% }); %> 
+                  
+                  <% allMovie.forEach(allMovie => { %>
+                    <% if(allMovie.showtimes.length && allCinema.showtimes.length ) {%>
+                      <h4><%= allMovie.name %></h4>
+                          <% allCinema.showtimes.forEach(function(showtimes){  %>
+                            <% if(allMovie.name ==  showtimes.movie.name){ %> 
+                              <div class="btn-group">
+                                <button type="button" disabled class="btn btn-primary"><%= showtimes.cinema.theater %> </button>
+                                <a class="btn btn-info" href="/booking/<%= allMovie._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
+                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                              </div>
+                            <% } %> 
+                        <% }) %> 
+                      <% } %>  
+                  <% }); %>
                   
                 </div>
 

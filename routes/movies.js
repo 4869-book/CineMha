@@ -23,7 +23,7 @@ var Comment = require('../model/comment');
 var Mylist = require('../model/mylist');
 var middleware = require('../middleware');
 const { move } = require('./manage');
-
+var Cinema = require('../model/cinemas');
 
 
 function getId(url) {
@@ -50,7 +50,6 @@ router.get('/', function(req, res, next) {
       console.log(err);
   } else {
       res.render('movies/index.ejs', {collection: allMovies, query: req.query});
-      //console.log(req.query.sort);
   }
   }).sort(mysort);
 });
@@ -76,13 +75,19 @@ router.post('/',upload.single('poster'), function(req, res){
 
 
 router.get('/:id', function(req, res){
-  Movie.findById(req.params.id).populate('comments').exec(function(err, foundMovie){
+  Movie.findById(req.params.id).populate('comments').populate('showtimes').exec(function(err, foundMovie){
     if(err){
         console.log(err);
     } else {
-      res.render('movies/show.ejs', {collection: foundMovie, query: req.query});
+      Cinema.find({}).populate('showtimes').exec(function(err, foundCinema){
+        if(err){
+            console.log(err);
+        } else {
+          res.render('movies/show.ejs', {collection: foundMovie,foundCinema:foundCinema, query: req.query});
+        }
+      });
     }
-});
+  });
 });
 
 router.post('/:id', middleware.isLoggedIn, function(req, res){

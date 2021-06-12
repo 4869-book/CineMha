@@ -28,7 +28,7 @@ router.get('/', function(req, res){
 
 router.post('/movie/:id', middleware.isLoggedIn, function(req, res){
   Movie.findById(req.params.id, function(err, foundMovie){
-      if(err){                                                
+      if(err){                                                                    
           console.log(err);
           res.redirect('/manage');
       } else {
@@ -62,12 +62,12 @@ router.post('/movie/:id', middleware.isLoggedIn, function(req, res){
 });
 
 router.post('/cinema/:id', middleware.isLoggedIn, function(req, res){
-  Cinema.findById(req.params.id, function(err, foundMovie){
+  Cinema.findById(req.params.id, function(err, foundCinema){
       if(err){
           console.log(err);
           res.redirect('/manage');
       } else {
-          Movie.findById(req.body.showtime.movie, function(err, foundCinema){
+          Movie.findById(req.body.showtime.movie, function(err, foundMovie){
             if(err){
               console.log(err);
               res.redirect('/manage');
@@ -80,6 +80,7 @@ router.post('/cinema/:id', middleware.isLoggedIn, function(req, res){
                     showtime.movie.name = foundMovie.name;
                     showtime.cinema.id = foundCinema._id;
                     showtime.cinema.name = foundCinema.name;
+                    showtime.cinema.theater = req.body.showtime.theater;
                     showtime.save();
                     foundMovie.showtimes.push(showtime);
                     foundMovie.save();
