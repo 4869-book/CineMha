@@ -1,10 +1,11 @@
 var express = require('express');
 var router  = express.Router({mergeParams: true});
 
-
+var middleware = require('../middleware');
 var Movie = require('../model/movies');
 var Showtime = require('../model/showtime');
-
+const user = require('../model/user');
+var User = require('../model/user');
 
 
 router.get('/:Movie_id/:showtime_id', function(req, res){
@@ -19,8 +20,9 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
   });
   });
 
-  router.post('/payment/:showtime_id', function(req, res){
+  router.post('/payment/:showtime_id',middleware.isLoggedIn, function(req, res){
      console.log(req.body.booking)
+     console.log(req.user)
     Showtime.findById(req.params.showtime_id).exec(function(err,foundShowtime){
       if(err){
         console.log(err);
@@ -29,6 +31,7 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
           if(err){
             console.log(err);
           }else{
+            
             res.render('booking/payment.ejs',{foundShowtime:foundShowtime,foundMovie:foundMovie,seat:req.body.booking});
           }
         })
@@ -36,7 +39,7 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
     })
   });
 
-  router.post('/payment/:showtime_id/confirm', function(req, res){
+  router.post('/payment/:showtime_id/:userid/confirm',middleware.isLoggedIn, function(req, res){
      console.log(req.body.booking);
      Showtime.findById(req.params.showtime_id).exec(function(err,foundShowtime){
       for (let x = 0; x < foundShowtime.seat.length; x++) {
@@ -52,11 +55,16 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
         if(err){
           console.log(err);
         }else{
+          // User.findById(req.params.userid).exec(function(err,foundUser){
+          //   if(err){
+          //     console.log()
+          //   }
+          // })
           res.redirect('/booking/'+foundShowtime.movie.id+'/'+req.params.showtime_id);
         }
       })
     })
  });
-
+ 
 
   module.exports = router;

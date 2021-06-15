@@ -12,7 +12,13 @@ var UserSchema = new mongoose.Schema({
             ref: 'Mylist'
         }
     ],
-    isAdmin :{type: Boolean, default:false}
+    isAdmin :{type: Boolean, default:false},
+    booking: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Booking'
+        }
+    ],
     
 });
 

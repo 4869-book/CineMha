@@ -7,6 +7,8 @@ var moviesSchema = new mongoose.Schema({
     teaser: String,
     genre:String,
     rate:String,
+    rating:String,
+    userrating:String,
     time:String,
     synosis: String,
     director: String,

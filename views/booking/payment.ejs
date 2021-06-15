@@ -42,7 +42,7 @@
                     </div>
                 </div>
 
-                <form action="/booking/payment/<%= foundShowtime._id %>/confirm" method="post">
+                <form action="/booking/payment/<%= foundShowtime._id %>/<% currentUser._id %> /confirm" method="post">
                     <input type="hidden" name="booking[showtime_id]" value="<%= foundShowtime._id %> "> 
                     <input type="hidden" name="booking[name]" value="<%= foundShowtime.movie.name %>">
                     <!-- <input type="hidden" name="booking[day]"> -->
