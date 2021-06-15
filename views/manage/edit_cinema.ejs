@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../patials/nav-bar.ejs')  %>
+
+    <div class="container py-3 text-center">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Movie Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/manage?path=allMovie">All Movies</a>
+                <a class="dropdown-item" href="/manage?path=newMovie">Add new Movie</a>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cinema Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/manage?path=allCinema">All Cinemas</a>
+                <a class="dropdown-item" href="/manage?path=newCinema">Add new Cinema</a>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                User Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="">All Users</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="container">
+            <h2 >Edit Cinema : </h2>
+            <%- messages() %> 
+            <form action="/cinemas/<%= editThis._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="">Cinema's Name</label>
+                    <input type="text" name="collection[name]" id="" class="form-control" value="<%=editThis.name %>" >
+                </div>
+                <div class="form-group">
+                    <label for="">Cinema's Location</label>
+                    <input type="text" name="collection[location]" id="" class="form-control" value="<%=editThis.location %>" >
+                </div>
+                <div class="form-group">
+                    <label for="">Cinema's City</label>
+                    <input type="text" name="collection[city]" id="" class="form-control" value="<%=editThis.city %>" >
+                </div>
+                <div class="form-group">
+                    <label for="">Cinema's Theater Number</label>
+                    <input type="text" name="collection[theater]" id="" class="form-control" value="<%=editThis.theater %>">
+                </div>
+                <div class="form-group">
+                    <label for="">Cinema's Picture</label>
+                    <img src="<%= editThis.picture %> " alt="">
+                    <input type="file" name="picture" id="" class="form-control"  accept="image/*" >
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary my-2">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    $(function(){
+        $('#messages').addClass('alert alert-success');
+    })
+</script>

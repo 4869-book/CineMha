@@ -3,6 +3,7 @@ var router = express.Router();
 
 var Movie = require('../model/movies');
 var Cinema = require('../model/cinemas');
+var User = require('../model/user');
 var Comment = require('../model/comment');
 var Showtime = require('../model/showtime')
 var middleware = require('../middleware');
@@ -19,7 +20,13 @@ router.get('/', function(req, res){
         if(err){
             console.log(err);
         } else {
-          res.render('manage/index.ejs', {allMovie: allMovie, allCinema:allCinema, query: req.query});
+          User.find({}).sort({name:1}).exec(function(err, allUser){
+            if(err){
+                console.log(err);
+            } else {
+              res.render('manage/index.ejs', {allMovie: allMovie, allCinema:allCinema, allUser:allUser, query: req.query});
+            }
+        });
         }
     });
     }
@@ -95,6 +102,31 @@ router.post('/cinema/:id', middleware.isLoggedIn, function(req, res){
       }
   });
 });
+
+router.delete('/showtime/:showtime_id',function(req, res){
+  Showtime.findByIdAndRemove(req.params.showtime_id, function(err,docs){
+    if(err){
+      console.log(err)
+      res.redirect('/manage'+'?path=allMovie');
+    }else {
+      Movie.findByIdAndUpdate(docs.movie.id,{$pull:{showtimes:req.params.showtime_id}}, function(err){
+        if(err){
+          console.log(err)
+          res.redirect('/manage'+'?path=allMovie');
+        }else {
+          Cinema.findByIdAndUpdate(docs.cinema.id,{$pull:{showtimes:req.params.showtime_id}}, function(err){
+            if(err){
+              console.log(err)
+              res.redirect('/manage'+'?path=allMovie');
+            }else {
+              res.redirect('/manage?path=allMovie');
+            }
+          })
+        }
+      })
+    }
+  })
+})
 
 
 module.exports = router;

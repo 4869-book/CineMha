@@ -22,7 +22,13 @@ var moviesSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Showtime'
         }
-    ] 
+    ],
+    boxoffice: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Boxoffice'
+        }
+    ]  
 });
 
 module.exports = mongoose.model('Movie',moviesSchema);

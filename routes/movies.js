@@ -24,6 +24,7 @@ var Mylist = require('../model/mylist');
 var middleware = require('../middleware');
 const { move } = require('./manage');
 var Cinema = require('../model/cinemas');
+const Showtime = require('../model/showtime');
 
 
 function getId(url) {
@@ -83,7 +84,13 @@ router.get('/:id', function(req, res){
         if(err){
             console.log(err);
         } else {
-          res.render('movies/show.ejs', {collection: foundMovie,foundCinema:foundCinema, query: req.query});
+          Showtime.find({}).exec(function(err, foundShowtime){
+            if(err){
+                console.log(err);
+            } else {
+              res.render('movies/show.ejs', {collection: foundMovie,foundCinema:foundCinema,foundShowtime:foundShowtime, query: req.query});
+            }
+          });
         }
       });
     }
@@ -131,7 +138,7 @@ router.put('/:movie_id',upload.single('poster'),function(req, res){
       res.redirect('/manage?path=allMovie');
     }else{
       req.flash("error","Edit Movie Sucessfully!");                                                 
-      res.redirect('/movies/'+req.params.movie_id);
+      res.redirect('/manage?path=allMovie');
     }
   });
 });

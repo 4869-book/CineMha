@@ -27,10 +27,11 @@
                         <h6 class="card-title"><i class="fas fa-eye">&nbsp&nbsp</i>Rate&nbsp&nbsp&nbsp&nbsp: <%= collection.rate %></h6>
                         <h6 class="card-title"><i class="fas fa-stopwatch">&nbsp&nbsp&nbsp</i>Time&nbsp&nbsp&nbsp: <%= collection.time %> Mins</h6>
                         <h6 class="card-title"><img src="/images/images.png" width="50px" alt=""></h6>
-                        <form class=" text-center"  action="/account/<%= collection._id %>?name=<%= collection.name %>&poster=<%= collection.poster %>  " method="post">
-                          <!-- <a class="btn btn-danger" href="/movies/<%= collection._id %>/addtolist"><i class="fas fa-plus"></i> MY List</a> -->
-                          <input class="btn btn-danger" type="submit"  value='+MY List'>
-                        </form>
+                        
+                          <form class=" text-center"  action="/account/<%= collection._id %>?name=<%= collection.name %>&poster=<%= collection.poster %>  " method="post">       
+                            <button class="btn btn-outline-danger" type="submit"><i class="fas fa-heart"></i></button>
+                          </form>
+                         
                       </div>
                       
                 </div>

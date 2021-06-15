@@ -20,7 +20,7 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
   });
 
   router.post('/payment/:showtime_id', function(req, res){
-    // console.log(req.body.booking.showtime_id)
+     console.log(req.body.booking)
     Showtime.findById(req.params.showtime_id).exec(function(err,foundShowtime){
       if(err){
         console.log(err);
@@ -35,6 +35,28 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
       }
     })
   });
+
+  router.post('/payment/:showtime_id/confirm', function(req, res){
+     console.log(req.body.booking);
+     Showtime.findById(req.params.showtime_id).exec(function(err,foundShowtime){
+      for (let x = 0; x < foundShowtime.seat.length; x++) {
+        for(let y = 0; y < foundShowtime.seat[x].length;y++){
+          req.body.booking.seat.forEach(element => {
+            if(foundShowtime.seat[x][y]==element){
+              foundShowtime.seat[x][y]="0";
+            }    
+          });        
+        }
+      }  
+      Showtime.findByIdAndUpdate(req.params.showtime_id,foundShowtime).exec(function(err,newShowtime){
+        if(err){
+          console.log(err);
+        }else{
+          res.redirect('/booking/'+foundShowtime.movie.id+'/'+req.params.showtime_id);
+        }
+      })
+    })
+ });
 
 
   module.exports = router;

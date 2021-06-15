@@ -10,17 +10,7 @@
 <body>
     <%- include('../patials/nav-bar.ejs')  %>
     <!-- <a href="cinemas/new" class="btn btn-primary my-2 float-right">Add New Cinema</a>   -->
-    
-    <div class="container pt-4 text-center">
-      <div class="btn-group btn-group-toggle " data-toggle="buttons">
-        <label class="btn btn-secondary active">
-          <input type="radio" name="options" id="option1" autocomplete="off" checked> By Location
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="options" id="option2" autocomplete="off"> By System
-        </label>
-        </div>	
-    </div>
+
     
     
     <div class="wrapper">
@@ -35,10 +25,7 @@
                   <div class="col-md-8">
                     <div class="card-body">
                       <h4 class="card-title"><a href="/cinemas/<%= collection._id %>"><%= collection.name %></a> </h4>
-                      <p class="card-text"><%= collection.location %> </p>
-                      <% for(var i = 0 ; i<4;i++){ %>
-                        <i class="fas fa-star"></i>
-                      <% }; %> 
+                      <p class="card-text"><%=  collection.location%>,<%=" "+collection.city %>  </p>
                     </div>
                   </div>
                 </div>

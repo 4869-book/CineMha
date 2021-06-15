@@ -11,7 +11,7 @@
 <body>
 
 <%- include('../patials/nav-bar.ejs')  %>
-<div class="wrapper">
+<!-- <div class="wrapper">
   <div class="container ">
      
       <div class="row py-3 mx-auto">
@@ -38,7 +38,7 @@
         </div>       
           
 </div>
-</div>
+</div> -->
 
 <div class="wrapper">
   <div class="container">
@@ -63,25 +63,51 @@
           </div>
         </div>
 
-        <div class="screen"><h2>SCREEN</h2></div>
-        <br>
+        <div class=" col screen"><h2>SCREEN</h2></div>
+        
           <% var seat="ABCDEFGHIJKLMNOPQRSTUVWXYZ" %> 
-          <% for(var x=12;x>=0;x--){%>
+          <div class="row table-responsive-md ">
+            <table class="table table-borderless">
+              <tbody>
+                <% var len=foundShowtime.seat.length %> 
+              <% for(let x=len-1;x>=0;x--){ %>
+                <tr class="allseat">
+                  <td>
+                    <h3><%=seat[x] %></h3>
+                  </td>
+                    <% for( let y = 0; y < foundShowtime.seat[x].length; y++ ) { %>
+                                           
+                      <% if(x<2){ %>
+                        <td>
+                          
+                          <% if (foundShowtime.seat[x][y]==0) { %>
+                            <button class="btn seat fas fa-chair fa-2x btn-warning " disabled value="<%= foundShowtime.seat[x][y] %>"></button>
+                            <% }else {%>
+                              <button class="btn seat fas fa-chair fa-2x premium" value="<%= foundShowtime.seat[x][y] %>"></button>
+                              <% } %> 
+                        </td>
+                      <% }else { %>
+                        <td>
+                          <% if (foundShowtime.seat[x][y]==0) { %>
+                            <button class="btn seat fas fa-chair fa-2x btn-warning" disabled value="<%= foundShowtime.seat[x][y] %>"></button>
+                            <% }else {%>
+                              <button class="btn seat fas fa-chair fa-2x deluxe" value="<%= foundShowtime.seat[x][y] %>"></button>
+                              <% } %> 
+                        </td>
+                      <% } %> 
+                    <% } %>
+                  
+                </tr>
+              <% } %>  
+                
+              </tbody>
+            </table>
+          </div>
           
-            <div class="btn-group col-12">
-              <h4><%= seat[x]%></h4><button class="btn " disabled value="(1,1)"></button>
-              <% for(var y=1;y<=13;y++){%>
-                  <% if(x<=3){ %>
-                    <button type="button" id="" value="<%= seat[x]+y %> "  class="btn seat fas fa-chair fa-2x premium "></button>
-                  <% }else { %>
-                    <button type="button" value="<%= seat[x]+y %> " class="btn seat fas fa-chair fa-2x deluxe"></button>
-                  <% } %>    
-              <% } %> 
-            </div>
-          <% } %>
 
       </div>
-      <div class="col-sm-3 col-12 my-3">
+      
+      <div class="col-sm-3 col-12 offset-md-0 align-self-center my-3">
         <div class="card ">
           <div class="card-header text-center">
               <h4 >Booking</h4>
@@ -94,25 +120,31 @@
             <h5><%= foundShowtime.cinema.name %> </h5>
             <h5>Select Seat : <span id="results">-</span> </h5>
             <h5>Total : <span id="price"> 0 </span> THB</h5>
+            <form action="/booking/payment/<%= foundShowtime._id %>" method="post">
+              <input type="hidden" name="booking[showtime_id]" value="<%= foundShowtime._id %> "> 
+              <input type="hidden" name="booking[name]" value="<%= foundShowtime.movie.name %>">
+              <!-- <input type="hidden" name="booking[day]"> -->
+              <input type="hidden" name="booking[location] " value="<%= foundShowtime.cinema.theater %>">
+
+              <span id="results2"></span>
+              
+              <input type="hidden" name="booking[total]" id="price2">
+              <input id="submit" type="submit" class="btn btn-success btn-block" value="submit">
+            </form>
             
           </div>
         </div>
 
-        <form action="/booking/payment/<%= foundShowtime._id %>" method="post">
-          <input type="hidden" name="booking[showtime_id]"> 
-          <input type="hidden" name="booking[name]" value="<%= foundShowtime.movie.name %>">
-          <input type="hidden" name="booking[day]">
-          <input type="hidden" name="booking[location] " value="<%= foundShowtime.cinema.theater %>">
-          <input type="hidden" name="booking[seat][]" id="results2">
-          <input type="hidden" name="booking[total]" id="price2">
-          <input type="submit" class="btn btn-success" value="submit">
-        </form>
+        
 
       </div>
     </div>
     
+    
   </div>
 </div>
+
+
 </body>
 </html>
 
@@ -124,6 +156,7 @@ const total = document.getElementById('total');
 const price2 = document.getElementById('price2');
 const results2 = document.getElementById('results2');
 const movieSelect = document.getElementById('movie');
+const submitbtn = document.getElementById('submit');
 
 // let ticketPrice = +movieSelect.value;
 
@@ -138,7 +171,7 @@ function updateSelectedCount() {
   price2.value=(selectedSeatsCount1*160)+(selectedSeatsCount2*100)
   // total.innerText = selectedSeatsCount * 100;
 }
-
+var items = [];
 
 //Seat click event
 container.addEventListener('click', e => {
@@ -154,20 +187,11 @@ container.addEventListener('click', e => {
   }else{
     price = 100;
   }
-  updateSelectedCount();
-});
-
-var items = [];
-
-
-
-
-
-$(".btn-group button").on('click', function(e){
   var indexOfElement = items.indexOf(e.target.value);
   //value is not in the array
   if (indexOfElement < 0) {
     items.push(e.target.value);
+    
     
   } else {
     //value is in the array, remove it
@@ -175,6 +199,17 @@ $(".btn-group button").on('click', function(e){
   }
   
   $('#results').text(items);
-  results2.value=items;
+  
+  updateSelectedCount();
 });
+
+
+submitbtn.addEventListener("click",myfunction);
+function myfunction(){
+  
+  items.forEach(element => {
+    results2.innerHTML +=('<input type="hidden" name="booking[seat][]" value="'+element+'">')
+  });
+}
+
 </script>

@@ -65,4 +65,39 @@ router.get('/new', function(req, res, next) {
       })
    });
 
+   router.get('/:id/edit',function(req,res){
+    Cinema.findById(req.params.id).exec(function(err,editThis){
+      if(err){
+        console.log(err);
+      }else{
+        res.render('manage/edit_cinema.ejs',{editThis:editThis});
+      }
+    })
+  })
+
+   router.put('/:cinema_id',upload.single('picture'),function(req, res){
+    if(req.file){
+      req.body.collection.picture = '/uploads/cinema/'+req.file.filename;
+    }
+    Cinema.findByIdAndUpdate(req.params.cinema_id, req.body.collection, function(err,updateCinema){
+      if(err){
+        res.redirect('/manage?path=allCinema');
+      }else{
+        req.flash("success","Edit Cinema Sucessfully!");                                                 
+        res.redirect('/manage?path=allCinema');
+      }
+    });
+  });
+  
+  router.delete('/:cinema_id',function(req, res){
+    Cinema.findByIdAndRemove(req.params.cinema_id, function(err){
+      if(err){
+        res.redirect('/manage'+'?path=allCinema');
+      }else {
+        req.flash("success","Delete Cinema Sucessfully!");
+        res.redirect('/manage?path=allCinema');
+      }
+    })
+  })
+
   module.exports = router;

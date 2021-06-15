@@ -9,7 +9,15 @@
         <div class="card mt-2">
             <div class="card-body">
               <p class="card-text"><%= comment.text %></p>
-              <h6 class="card-text text-right"><%= comment.author.username %></h6>
+              <% var rate=comment.stars %> 
+              <h6 class="card-text text-right"><% for( let index = 0; index <  5; index++ ) { %>
+              <% if (rate!=0) { %>
+                <span class="fa fa-paw fa-2x checked"></span>
+                <% rate-=1; %> 
+              <% }else { %>
+                <span class="fa fa-paw fa-2x"></span>
+                <% } %> 
+              <% } %>  By <%= comment.author.username %></h6>
             </div>
         </div> 
      
@@ -25,12 +33,47 @@
   
       <form action='/movies/<%= collection._id %>' method="post">
         <div class="form-group">
-          <textarea class="form-control" name="comment[text]" id="" cols="20" rows="5"></textarea>
+          <div class="rating float-right">
+            <label>
+              <input type="radio" name="comment[stars]" value="1" />
+              <span class="icon"><i class="fas fa-paw fa-2x">-</i></span>
+            </label>
+            <label>
+              <input type="radio" name="comment[stars]" value="2" />
+              <span class="icon"><i class="fas fa-paw fa-2x">-</i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x">-</i></span>
+            </label>
+            <label>
+              <input type="radio" name="comment[stars]" value="3" />
+              <span class="icon"> <i class="fas fa-paw fa-2x">-</i></span>
+              <span class="icon"> <i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"> <i class="fas fa-paw fa-2x">- </i></span>   
+            </label>
+            <label>
+              <input type="radio" name="comment[stars]" value="4" />
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+            </label>
+            <label>
+              <input type="radio" name="comment[stars]" value="5" />
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x">- </i></span>
+              <span class="icon"><i class="fas fa-paw fa-2x"></i></span>
+            </label>
         </div>
-  
+          <textarea class="form-control" name="comment[text]" id="" cols="20" rows="5" required></textarea>
+          
+        </div> 
+
         <div class="form-group text-right">
           <input type="submit" value="Post" class="btn btn-primary my-2 ">
         </div>
+
+        
         
       </form>
         

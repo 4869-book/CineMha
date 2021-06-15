@@ -28,13 +28,16 @@
               </button> -->
               <div class="row">
                 <div class="col-1"><h6><%=i %></h6></div>
-                <div class="col-5"><a class="text-dark" href="/movies/<%= allCinema._id %>?path=showtime"><%= allCinema.name %></a> </div>
+                <div class="col-5"><a class="text-dark" href="/cinemas/<%= allCinema._id %>?path=showtime"><%= allCinema.name %></a> </div>
                 <div class="col-4 ">
                   <div class="button-groub">
                     <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">Showtime</button>
+
+                    <a class="btn btn-warning" href="cinemas/<%= allCinema._id %>/edit/">Edit</a>
                     
-                    <button class="btn btn-warning">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <form style="display: inline;" action="/cinemas/<%= allCinema._id %>?_method=DELETE" method="post">
+                      <button onclick="myFunction()" class="btn btn-danger">Delete</button>
+                    </form>
                     
                   </div>
                 </div>
@@ -91,8 +94,10 @@
                               <div class="btn-group">
                                 <button type="button" disabled class="btn btn-primary"><%= showtimes.cinema.theater %> </button>
                                 <a class="btn btn-info" href="/booking/<%= allMovie._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
-                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                
+                                <button  type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                               </div>
+                              
                             <% } %> 
                         <% }) %> 
                       <% } %>  
@@ -111,6 +116,13 @@
         </div>
         <% }) %>
       </div>
-
+      
 </div>
 
+
+<script>
+     
+function myFunction() {
+  confirm("Are you sure to delete this?");
+ }
+</script>

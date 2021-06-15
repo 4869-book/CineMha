@@ -4,14 +4,15 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var UserSchema = new mongoose.Schema({
     username: String,
     email:String,
-    rank:String,
+    profileImage:{type: String, default:"/uploads/user/picture-1622449399189.png"},
     password: String,
     mylists: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Mylist'
         }
-    ]
+    ],
+    isAdmin :{type: Boolean, default:false}
     
 });
 

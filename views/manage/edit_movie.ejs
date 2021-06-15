@@ -1,4 +1,13 @@
-<%- include('../patials/nav-bar.ejs')  %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../patials/nav-bar.ejs')  %>
 
     <div class="container py-3 text-center">
         <div class="btn-group">
@@ -34,7 +43,7 @@
     <div class="wrapper">
         <div class="container">
             <h2 >Edit Movie :</h2>
-            <%= messages() %> 
+            <%- messages() %> 
             <form action="/movies/<%= editThis._id %>?_method=PUT" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="">Movie's Name</label>
@@ -86,9 +95,12 @@
             </form>
         </div>
     </div>
+</body>
+</html>
 
 <script>
     $(function(){
         $('#messages').addClass('alert alert-success');
     })
+
 </script>

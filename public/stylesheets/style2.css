@@ -1,5 +1,6 @@
 
-@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
+
+
 
 
 .selected { 
@@ -10,14 +11,6 @@
   background-color: #fff;
 }
 
-/* add walkline here */
-/* .seat:nth-of-type(2) {
-  margin-right: 18px;
-}
-
-.seat:nth-last-of-type(2) {
-  margin-left: 18px;
-} */
 
 .seat:not(.occupied):hover {
   cursor: pointer;
@@ -46,12 +39,10 @@
 
 
 .screen {
-  
-  margin-left: auto;
-  margin-right: auto;
+
   background: #fff;
   height: 70px;
-  width: 100%;
+  width: 70%;
   transform: rotateX(-45deg);
   box-shadow: 0 3px 10px rgba(255,255,255,0.7);
 }
@@ -74,3 +65,4 @@ p.text span {
   color: #0081cb
   ;
 }
+

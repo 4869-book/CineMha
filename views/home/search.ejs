@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../patials/nav-bar.ejs')  %>
+   <div class="wrapper">
+       <div class="container">
+           <h1>Movie:</h1>
+           <% if (movieSearch.length!=0) { %>
+               <div class="row row-cols-lg-4 row-cols-2 row-cols-md-3 d-flex justify-content-center">
+                <% movieSearch.forEach(collection => { %> 
+                
+                  <div class="col">
+                    <a href="/movies/<%= collection._id %>/?path=showtime">
+                        <div class="card bg-secondary border-secondary mb-1" style="max-width: 18rem; height: 70%;">
+                            <div class="text-center">
+                                <p class="card-header text-light"><%= collection.name %></p>
+                                <p class="card-text text-light mt-3"><%= collection.date.toISOString().slice(0, 10) %></p>
+                              </div>
+                            <div class="card-body"><img src="<%= collection.poster %>" class="card-img-top" alt="..."></div>
+                            
+                          </div>
+                    </a>     
+                  </div>
+                  
+                <% }); %>    
+             </div>
+
+           <% }else{ %>
+            <h1>Movie not found</h1>
+            <% } %> 
+       </div>
+   </div>
+   <div class="wrapper">
+    <div class="container py-3">
+        <h1>Cinema:</h1>
+        <% if (cinemaSearch.length!=0) { %>
+            <% cinemaSearch.forEach(collection => { %>
+                <div class="card mx-auto container-fluid my-3" style="max-width: 720px;">
+                    <div class="row no-gutters">
+                      <div class="col-md-4 my-2 pl-2">
+                        <img src="<%= collection.picture %>" class="card-img" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h4 class="card-title"><a href="/cinemas/<%= collection._id %>"><%= collection.name %></a> </h4>
+                          <p class="card-text"><%=  collection.location%>,<%=" "+collection.city %>  </p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <% }); %>  
+        <% }else{ %>
+            <h1>Cinema not found</h1>
+            <% } %>  %>
+    </div>
+</div>
+</body>
+</html>

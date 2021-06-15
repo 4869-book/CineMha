@@ -38,9 +38,23 @@
                     <div class="card-body">
                         <h6 class="card-title"><i class="fas fa-chair">&nbsp&nbsp</i>Selected Seat : <%= seat.seat %></h6>
                         <h6 class="card-title"><i class="fas fa-money-bill-alt">&nbsp&nbsp</i>Total : <%= seat.total %> THB</h6>
-                          
+           
                     </div>
                 </div>
+
+                <form action="/booking/payment/<%= foundShowtime._id %>/confirm" method="post">
+                    <input type="hidden" name="booking[showtime_id]" value="<%= foundShowtime._id %> "> 
+                    <input type="hidden" name="booking[name]" value="<%= foundShowtime.movie.name %>">
+                    <!-- <input type="hidden" name="booking[day]"> -->
+                    <input type="hidden" name="booking[location] " value="<%= foundShowtime.cinema.theater %>">
+                    <% seat.seat.forEach(element => { %>
+                        <input type="hidden" name="booking[seat][] " value="<%= element %>">
+                    <% }) %>
+                    <input type="hidden" name="booking[total]" value="<%= seat.total %>">
+                    <button class="btn btn-success btn-lg btn-block"  type="submit">Pay</button>
+                    
+                </form>
+                
 
           </div>
         </div>       

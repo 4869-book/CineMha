@@ -19,7 +19,7 @@ db.once('open', function() {
   console.log("connected to databese successfuly");
 });
 
-
+var homeRouter = require('./routes/home');
 var usersRouter = require('./routes/users');
 var moviesRouter = require('./routes/movies');
 var cinemasRouter = require('./routes/cinemas');
@@ -72,7 +72,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use('/home',homeRouter);
 app.use('/movies', moviesRouter);
 app.use('/users', usersRouter);
 app.use('/cinemas', cinemasRouter);
@@ -82,6 +82,7 @@ app.use('/news',newsRouter);
 app.use('/account',accountRouter);
 app.use('/manage',manageRouter);
 app.use('/booking',bookingRouter);
+
 
 
 
