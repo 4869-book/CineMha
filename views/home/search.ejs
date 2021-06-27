@@ -10,7 +10,7 @@
     <%- include('../patials/nav-bar.ejs')  %>
    <div class="wrapper">
        <div class="container">
-           <h1>Movie:</h1>
+           <h1>Movie : <%= movieSearch.length %>  results</h1>
            <% if (movieSearch.length!=0) { %>
                <div class="row row-cols-lg-4 row-cols-2 row-cols-md-3 d-flex justify-content-center">
                 <% movieSearch.forEach(collection => { %> 
@@ -36,7 +36,7 @@
             <% } %> 
        </div>
    </div>
-   <div class="wrapper">
+   <!-- <div class="wrapper">
     <div class="container py-3">
         <h1>Cinema:</h1>
         <% if (cinemaSearch.length!=0) { %>
@@ -59,6 +59,6 @@
             <h1>Cinema not found</h1>
             <% } %>  %>
     </div>
-</div>
+</div> -->
 </body>
 </html>

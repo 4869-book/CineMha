@@ -20,6 +20,47 @@
         </div>
         <% var i=1 %> 
         <% allCinema.forEach(allCinema => { %>
+
+          <div class="modal fade" id="editcinema" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Cinema</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="/cinemas/<%= allCinema._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="">Cinema's Name</label>
+                        <input type="text" name="collection[name]" id="" class="form-control" value="<%=allCinema.name %>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Cinema's Location</label>
+                        <input type="text" name="collection[location]" id="" class="form-control" value="<%=allCinema.location %>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Cinema's City</label>
+                        <input type="text" name="collection[city]" id="" class="form-control" value="<%=allCinema.city %>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Cinema's Theater Number</label>
+                        <input type="text" name="collection[theater]" id="" class="form-control" value="<%=allCinema.theater %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Cinema's Picture</label>
+                        <img style="max-width: 300px;" src="<%= allCinema.picture %> " alt="">
+                        <input type="file" name="picture" id="" class="form-control"  accept="image/*" >
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary my-2">
+                </form>
+                </div>
+        
+              </div>
+            </div>
+          </div>
+
         <div class="card">
           <div class="card-header " id="headingOne">
             
@@ -33,12 +74,31 @@
                   <div class="button-groub">
                     <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">Showtime</button>
 
-                    <a class="btn btn-warning" href="cinemas/<%= allCinema._id %>/edit/">Edit</a>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editcinema">
+                      Edit
+                    </button>
                     
                     <form style="display: inline;" action="/cinemas/<%= allCinema._id %>?_method=DELETE" method="post">
-                      <button onclick="myFunction()" class="btn btn-danger">Delete</button>
-                    </form>
-                    
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<%=i%>">
+                        Delete
+                      </button>
+                      
+                    <div class="modal fade" id="delete<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content ">
+                          <div class="modal-body">
+                            <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete <%=allCinema.name%> ?</h5>
+                            <p>This is not something you can undone.</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+               </form> 
+
                   </div>
                 </div>
               </div>
@@ -61,7 +121,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group mr-sm-2">
+                    <!-- <div class="form-group mr-sm-2">
                       <label for="">Theater : </label>
                       <select class="form-control" name="showtime[theater]" id="">
                           <option selected>select</option>
@@ -72,7 +132,7 @@
                           <option value="5">5</option>
                         </select>
 
-                  </div>
+                  </div> -->
         
                     <div class="form-group">
                         <label for="">Time : </label>
@@ -86,22 +146,7 @@
               <div class="row">
                 <div class="col-12">
                   
-                  <% allMovie.forEach(allMovie => { %>
-                    <% if(allMovie.showtimes.length && allCinema.showtimes.length ) {%>
-                      <h4><%= allMovie.name %></h4>
-                          <% allCinema.showtimes.forEach(function(showtimes){  %>
-                            <% if(allMovie.name ==  showtimes.movie.name){ %> 
-                              <div class="btn-group">
-                                <button type="button" disabled class="btn btn-primary"><%= showtimes.cinema.theater %> </button>
-                                <a class="btn btn-info" href="/booking/<%= allMovie._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
-                                
-                                <button  type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                              </div>
-                              
-                            <% } %> 
-                        <% }) %> 
-                      <% } %>  
-                  <% }); %>
+                  
                   
                 </div>
 

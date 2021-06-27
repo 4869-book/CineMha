@@ -24,7 +24,6 @@ var upload  = multer({storage: storage, fileFilter: imageFilter});
 var middleware = require('../middleware');
 var Movie = require('../model/movies');
 var User = require('../model/user');
-var Mylist = require('../model/mylist');
 
 
 /* GET home page. */
@@ -33,7 +32,8 @@ router.get('/',middleware.isLoggedIn, function(req, res, next) {
         if(err){
             console.log(err);
         } else {
-            res.render('account/index.ejs',{collection: foundMylist, query: req.query });
+          
+          res.render('account/index.ejs',{collection: foundMylist, query: req.query });
         }
     });  
 });
@@ -44,15 +44,11 @@ router.post('/:id', middleware.isLoggedIn, function(req, res){
           console.log(err);
           res.redirect('/movies');
       } else {
-          Mylist.create({movie_id: req.params.id, movie_name: req.query.name, movie_poster: req.query.poster} , function(err, mylist){
-              if(err) {
-                  console.log(err);
-              } else {
-                foundCollection.mylists.push(mylist);
-                foundCollection.save();
-                res.redirect('/account?path=mylist');
-              }
-          });
+        console.log(req.params.id)
+        foundCollection.mylists.push(req.params.id);
+        foundCollection.save();
+        res.redirect('/account?path=mylist');
+        
       }
   });
 });
@@ -72,12 +68,12 @@ router.put('/:user_id',upload.single('profileImage'),function(req, res){
   });
 
 router.delete('/:mylist_id',function(req,res){
-  Mylist.findByIdAndDelete(req.params.mylist_id,function(err,dosc){
+  User.findByIdAndUpdate(req.user._id,{$pull:{mylists:req.params.mylist_id}}, function(err){
     if(err){
       console.log(err);
-      res.redirect('/account?path=mylist');
+      
     }else{
-      res.redirect('/account?path=mylist');
+      res.redirect('back');
     }
   })
 })

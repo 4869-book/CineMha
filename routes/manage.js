@@ -9,7 +9,27 @@ var Showtime = require('../model/showtime')
 var middleware = require('../middleware');
 
 
-
+router.get('/2/', function(req, res){
+  Movie.find({}).sort({name:1}).populate('showtimes').exec(function(err, allMovie){
+    if(err){
+        console.log(err);
+    } else {
+      Cinema.find({}).sort({name:1}).populate('showtimes').exec(function(err, allCinema){
+        if(err){
+            console.log(err);
+        } else {
+          User.find({}).sort({name:1}).exec(function(err, allUser){
+            if(err){
+                console.log(err);
+            } else {
+              res.render('manage/index2.ejs', {allMovie: allMovie, allCinema:allCinema, allUser:allUser, query: req.query});
+            }
+        });
+        }
+    });
+    }
+});
+});
 
 router.get('/', function(req, res){
   Movie.find({}).sort({name:1}).populate('showtimes').exec(function(err, allMovie){
@@ -128,5 +148,14 @@ router.delete('/showtime/:showtime_id',function(req, res){
   })
 })
 
+router.put('/:movie_id',function(req, res){
+  Movie.findByIdAndUpdate(req.params.movie_id,{boxoffice:req.body.boxoffice},function(err){
+    if(err){
+      console.log(err)
+    }else{
+      res.redirect('back');
+    }
+  })
+});
 
 module.exports = router;

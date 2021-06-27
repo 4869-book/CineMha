@@ -56,10 +56,10 @@
                     </div>
                     <input type="text" name="movie[teaser]" id="" class="form-control" value="<%= editThis.teaser %>" >
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="">Movie's Genre</label>
                     <input type="text" name="movie[genre]" id="" class="form-control" placeholder="<%= editThis.genre %>" value="<%= editThis.genre %>" >
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="">Movie's Rate</label>
                     <input type="text" name="movie[rate]" id="" class="form-control" placeholder="<%= editThis.rate %>" value="<%= editThis.rate %>">
@@ -83,7 +83,13 @@
                 <div class="form-group">
                     <label for="">Movie's Poster</label>
                     <img src="<%= editThis.poster %> " alt="">
-                    <input type="file" name="poster" id="" class="form-control" accept="image/*" value="<%= editThis.poster %>" >
+                    <input type="hidden" name="poster" id="" class="form-control" accept="image/*" value="<%= editThis.poster %>" >
+
+                </div>
+                <div class="form-group">
+                    <label for="">Movie's Wide-Poster</label>
+                    <img src="<%= editThis.widePoster %> " alt="">
+                    <input type="file" name="poster" id="" class="form-control" accept="image/*" value="<%= editThis.widePoster %>" >
 
                 </div>
                 <!-- <div class="form-group">

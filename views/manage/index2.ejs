@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../patials/nav-bar.ejs')  %>
+<div class="container">
+    <%- messages() %> 
+</div>
+    <div class="container py-3 text-center">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Movie Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="?path=allMovie">All Movies</a>
+                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#newmovie">
+                    Add new Movie
+                  </button>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cinema Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="?path=allCinema">All Cinemas</a>
+                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#newcinema">
+                    Add new Cinema
+                  </button>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                User Manager
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="?path=allUser">All Users</a>
+            </div>
+        </div>
+    </div>
+
+    <% if(query.path == 'allMovie') { %>
+        <%- include('manage_patials/movies_table.ejs')%>
+    <% }else if(query.path == 'allCinema') { %>
+        <%- include('manage_patials/cinemas_table.ejs')%>
+    <% }else if(query.path == 'allUser') { %>
+        <%- include('manage_patials/user_table.ejs')%>
+    <% } %>  %>
+
+</body>
+</html>
+
+<script>
+    $(function(){
+        $('#messages').addClass('alert alert-success');
+    })
+</script>
+
+<%- include('modal/modal1.ejs')%>

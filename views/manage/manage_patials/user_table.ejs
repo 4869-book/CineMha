@@ -34,10 +34,7 @@
                     </div>
                     <div class="col-4 ">
                       <div class="button-groub">
-                        <!-- <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">Showtime</button> -->
                         
-                        <!-- <button class="btn btn-warning">Edit</button> -->
-                        <!-- <a class="btn btn-warning" href="movies/<%= allMovie._id %>/edit/">Edit</a> -->
                         
                           <% if (allUser.isAdmin) { %>
                            
@@ -53,76 +50,7 @@
                 
               </div>
           
-              <!-- <div id="collapseOne<%= i++ %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" >
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <form class="form-inline" action="/manage/movie/<%= allMovie._id %> " method="post">
-                  
-                        <div class="form-group mr-sm-2">
-                          <label for="">Cinema : </label>
-                          <select class="form-control" name="showtime[cinema]" id="" required>
-                              <option selected>select</option>
-                              <% allCinema.forEach(allCinema => { %>
-                                <option value="<%= allCinema._id  %>"><%= allCinema.name  %> </option>       
-                              <% }) %> 
-                            </select>
-                        </div>
-
-                        <div class="form-group mr-sm-2">
-                          <label for="">Theater : </label>
-                          <select class="form-control" name="showtime[theater]" id="" required>
-                              <option selected>select</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                            </select>
-                        </div>
-                        
-                        
-                        <div class="form-group">
-                            <label for="">Time : </label>
-                            <input class="form-control mr-sm-2" type="time" name="showtime[time]" id="" required>
-                        </div>
-
-                        <button class="btn btn-success">Add New</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-
-
-                        <% allCinema.forEach(allCinema => { %>
-                          <% if(allCinema.showtimes.length && allMovie.showtimes.length ) {%>
-                            <h4><%= allCinema.name %></h4>
-                                <% allMovie.showtimes.forEach(function(showtimes){  %>
-                                  <% if(allCinema.name == showtimes.cinema.name){ %> 
-                                    <div class="btn-group">
-                                      <button type="button" disabled class="btn btn-primary"><%= showtimes.cinema.theater %> </button>
-                                      <a class="btn btn-info" href="/booking/<%= allMovie._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
-                                      
-                                      
-                                        <form  style="display: inline;" action="/manage/showtime/<%= showtimes._id %>?_method=DELETE" method="post">
-                                          <button onclick="myFunction()" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                                        </form>
-                                      
-                                    </div>
-                                  <% } %> 
-                              <% }) %> 
-                            <% } %>  
-                        <% }); %>
-            
-                    </div>
-
-
-                  </div>
-                </div>
-                
-                
-
-              </div> -->
+          
               
             </div>
             <% }) %>

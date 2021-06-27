@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="stylesheets/owlcarousel/owl.carousel.min.css">
+<link rel="stylesheet" href="stylesheets/owlcarousel/owl.theme.default.min.css">
+<script src="jquery.min.js"></script>
+<script src="stylesheets/owlcarousel/owl.carousel.min.js"></script>
+<style>
+
+.contain {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.item {
+  
+  background-color: black;
+  color: white;
+  display: flex;
+  height: 600px;
+  
+}
+
+.left-wrap{
+  margin: auto;
+  margin-left: 100px;
+}
+
+.left-wrap .card-title{
+    font-size: 70px;
+}
+
+.card {
+  background-color: black;
+}
+
+    
+</style>
+    <div id="owl-carousel" class="owl-carousel owl-theme">
+      <% allMovie.forEach(collection => { %>
+        <% if (collection.showtimes.length!=0) { %>
+          <div class="item">
+            <div class="left-wrap col-4 ">
+              <div class="card bg-black ">
+                <div class="card-body">
+                  <h2 class="card-title"><%= collection.name %> </h2>
+                  <p><i class="fas fa-tags">
+                    <% collection.genre.forEach(element => { %>
+                    </i> <a href="#"><%=element%></a>, 
+                    <% }) %> 
+                  </p>
+              <p class="card-text"><%= collection.synosis %></p>
+              <a href="#" class="btn btn-success"><h2>Ticket</h2></a>
+              
+            </div>
+          </div>
+      </div>
+      <div style="box-shadow:inset 200px 0px 100px 0px  rgba(0, 0, 0, 1);background-size: cover; background-position: center;background-image: 
+      url('<%=collection.widePoster %>'); height: 600px;" class="col-8"></div>
+            </div>
+        <% } %> 
+      <% }) %>
+    </div>
+
+<script>
+$('#owl-carousel').owlCarousel({
+    loop: true,
+    margin: 30,
+    dots: true,
+    nav: true,
+    items: 1,
+    autoplay:true,   
+    autoplayTimeout:3000,
+    autoplayHoverPause:true
+})
+</script>

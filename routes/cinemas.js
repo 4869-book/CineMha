@@ -95,7 +95,7 @@ router.get('/new', function(req, res, next) {
         res.redirect('/manage'+'?path=allCinema');
       }else {
         req.flash("success","Delete Cinema Sucessfully!");
-        res.redirect('/manage?path=allCinema');
+        res.redirect('/manage/2?path=allCinema');
       }
     })
   })

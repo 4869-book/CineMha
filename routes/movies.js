@@ -20,11 +20,11 @@ var imageFilter = function (req, file, callback){
 var upload  = multer({storage: storage, fileFilter: imageFilter});
 var Movie = require('../model/movies');
 var Comment = require('../model/comment');
-var Mylist = require('../model/mylist');
 var middleware = require('../middleware');
 const { move } = require('./manage');
 var Cinema = require('../model/cinemas');
 const Showtime = require('../model/showtime');
+const Boxoffice = require('../model/boxoffice');
 
 
 function getId(url) {
@@ -59,8 +59,10 @@ router.get('/new', function(req, res ,next) {
   res.render('movies/new.ejs');
 })
 
-router.post('/',upload.single('poster'), function(req, res){
-  req.body.movie.poster = '/uploads/'+req.file.filename;
+router.post('/',upload.array('poster',2), function(req, res){
+  req.body.movie.poster = '/uploads/'+req.files[0].filename;
+  req.body.movie.widePoster = '/uploads/'+req.files[1].filename;
+ 
   req.body.movie.teaser = getId(req.body.movie.teaser);
   
   Movie.create(req.body.movie, function(err, newlyCreated){
@@ -68,15 +70,21 @@ router.post('/',upload.single('poster'), function(req, res){
       console.log(err);
     }else{
       req.flash("error","Add Movie Sucessfully!");
-      res.redirect('/movies');
-      console.log("Add Movie Sucessfully");
+          res.redirect('/movies');
+          console.log("Add Movie Sucessfully");
     }
   })
 })
 
 
 router.get('/:id', function(req, res){
-  Movie.findById(req.params.id).populate('comments').populate('showtimes').exec(function(err, foundMovie){
+  var flag=0
+  if(req.user){
+    if(req.user.mylists.includes(req.params.id)){
+      flag=1
+    }
+  }
+  Movie.findById(req.params.id).populate('comments').populate('showtimes').populate('boxoffice').exec(function(err, foundMovie){
     if(err){
         console.log(err);
     } else {
@@ -88,7 +96,15 @@ router.get('/:id', function(req, res){
             if(err){
                 console.log(err);
             } else {
-              res.render('movies/show.ejs', {collection: foundMovie,foundCinema:foundCinema,foundShowtime:foundShowtime, query: req.query});
+              
+              var score = 0
+              foundMovie.comments.forEach(element => {
+                score = score + element.stars
+              });
+              console.log(score)
+              Movie.updateOne({ _id : req.params.id },
+              { $set: { "userrating" : score } });
+              res.render('movies/show.ejs', {collection: foundMovie,foundCinema:foundCinema,foundShowtime:foundShowtime, query: req.query,flag:flag});
             }
           });
         }
@@ -131,7 +147,8 @@ router.get('/:id/edit',function(req,res){
 
 router.put('/:movie_id',upload.single('poster'),function(req, res){
   if(req.file){
-    req.body.movie.poster = '/uploads/'+req.file.filename;
+    
+    req.body.movie.widePoster = '/uploads/'+req.file.filename;
   }
   Movie.findByIdAndUpdate(req.params.movie_id, req.body.movie, function(err,updateMovie){
     if(err){

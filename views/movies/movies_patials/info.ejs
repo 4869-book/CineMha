@@ -4,11 +4,38 @@
         <div class="card-body">
           <h5 class="card-title">Box Office</h5>
           <h6 class="card-title ">Domestic</h6>
-          <p class="card-text">$XXXXXXXX</p>
+          <p class="card-text">
+            <% if (collection.boxoffice.domestic!=0) { %>
+              <%= collection.boxoffice.domestic.toLocaleString('us-US', { style: 'currency', currency: 'USD' }) %>
+            <% }else { %>
+              -
+            <% } %> 
+          </p>
           <h6 class="card-title ">International</h6>
-          <p class="card-text">$XXXXXXXX</p>
+          <p class="card-text">
+            <% if (collection.boxoffice.international!=0) { %>
+              <%= collection.boxoffice.international.toLocaleString('us-US', { style: 'currency', currency: 'USD' }) %>
+            <% }else { %>
+              -
+            <% } %> 
+          </p>
           <h6 class="card-title ">Worldwide</h6>
-          <p class="card-text">$XXXXXXXX</p>
+          <p class="card-text">
+            <% if (collection.boxoffice.worldwide!=0) { %>
+              <%= collection.boxoffice.worldwide.toLocaleString('us-US', { style: 'currency', currency: 'USD' }) %>
+            <% }else { %>
+              -
+            <% } %> 
+          </p>
+          <% if (currentUser) { %>
+           <% if (currentUser.isAdmin) { %>
+            <div class="float-right">
+              <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-secondary fas fa-cog" data-toggle="modal" data-target="#myModal"></button>
+          </div>
+           <% } %>
+          <% } %>
+
         </div>
       </div>
     </div>
@@ -33,3 +60,40 @@
         </div>
     </div>
   </div>
+
+          
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Box Office</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/manage/<%= collection._id %>?_method=PUT" method="post">
+        <div class="form-group">
+            <label for="">Domestic (USD)</label>
+            <input type="number" name="boxoffice[domestic]" id="" class="form-control" placeholder="<%= collection.boxoffice.domestic%>" >
+        </div>
+        <div class="form-group">
+            <label for="">International (USD)</label>
+            <input type="number" name="boxoffice[international]" id="" class="form-control" placeholder="<%= collection.boxoffice.international%>" >
+        </div>
+        <div class="form-group">
+          <label for="">Worldwide (USD)</label>
+          <input type="number" name="boxoffice[worldwide]" id="" class="form-control" placeholder="<%= collection.boxoffice.worldwide%>" >
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary"  value="Save">
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>

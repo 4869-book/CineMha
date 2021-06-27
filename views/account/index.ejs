@@ -53,12 +53,12 @@
                             
                               <div class="col col-md-6">
                                 <div class="col">
-                                    <a href="/movies/<%= collection.movie_id %>/?path=showtime">
+                                    <a href="/movies/<%= collection._id %>/?path=showtime">
                                         <div class="card bg-secondary border-secondary mb-1" style="max-width: 18rem; height: 25rem;">
                                             <div class="text-center">
-                                                <p class="card-header text-light"><%= collection.movie_name %></p>
+                                                <p class="card-header text-light"><%= collection.name %></p>
                                               </div>
-                                            <div class="card-body"><img style="height: 20rem;" src="<%= collection.movie_poster %>" class="card-img-top" alt="..."></div>
+                                            <div class="card-body"><img style="height: 20rem;" src="<%= collection.poster %>" class="card-img-top" alt="..."></div>
                                             
                                           </div>
                                     </a>  

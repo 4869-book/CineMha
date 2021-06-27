@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 var boxofficeSchema = new mongoose.Schema({
     
-    domestic : String,
-    international: String,
-    worldwide: String
+    domestic : { type: Number, default: 0 },
+    international: { type: Number, default: 0 },
+    worldwide: { type: Number, default: 0 }
     
 });
 

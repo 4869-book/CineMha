@@ -6,12 +6,10 @@ var UserSchema = new mongoose.Schema({
     email:String,
     profileImage:{type: String, default:"/uploads/user/picture-1622449399189.png"},
     password: String,
-    mylists: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Mylist'
-        }
-    ],
+    mylists: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Movie'
+    }],
     isAdmin :{type: Boolean, default:false},
     booking: [
         {
