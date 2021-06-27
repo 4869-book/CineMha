@@ -1,231 +1,233 @@
 
+  <div  class="container">
 
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <div class="card-header " id="headingOne">
 
-    <div  class="container">
-
-          <div class="accordion" id="accordionExample">
-            <div class="card">
-              <div class="card-header " id="headingOne">
-
-                <div class="row">
-                  <div class="col-1"><h6>#</h6></div>
-                  <div class="col-5"><a href="#"><h6>Name</h6></a></div>
-                  <div class="col-2"><a href="#"><h6>Release Date</h6></a></div>
-                </div>
-              
-            </div>
-            </div>
-            <% var i=1 %> 
-            <% allMovie.forEach(allMovie => { %>
-            <div class="card">
-              <div class="card-header " id="headingOne">
-                
-
-                  <div class="row">
-                    <div class="col-1"><h6><%=i %></h6></div>
-                    <div class="col-5"><a class="text-dark" href="/movies/<%= allMovie._id %>?path=showtime"><%= allMovie.name %></a> </div>
-                    <div class="col-2"><%= allMovie.date.toISOString().slice(0, 10) %></div>
-                    <div class="col-4 ">
-                      <div class="button-groub">
-                        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">Showtime</button>
-                        
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editmovie">
-                          Edit
-                        </button>
-                        
-                          <form style="display: inline;" action="/movies/<%= allMovie._id %>?_method=DELETE" method="post">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<%=i%>">
-                              Delete
-                            </button>
-                            
-                          <div class="modal fade" id="delete<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content ">
-                          <div class="modal-body">
-                            <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete <%=allMovie.name%> ?</h5>
-                            <p>This is not something you can undone.</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                          </form>
-                        
-                      </div>
-                    </div>
-                  </div>
-                
-              </div>
-          
-              <div id="collapseOne<%= i++ %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" >
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <form class="form-inline" action="/manage/movie/<%= allMovie._id %> " method="post">
-                  
-                        <div class="form-group mr-sm-2">
-                          <label for="">Cinema : </label>
-                          <select class="form-control" name="showtime[cinema]" id="" required>
-                              <option selected>select</option>
-                              <% allCinema.forEach(allCinema => { %>
-                                <option value="<%= allCinema._id  %>"><%= allCinema.name  %> </option>       
-                              <% }) %> 
-                            </select>
-                        </div>
-
-                        <div class="form-group mr-sm-2">
-                          <label for="">Theater : </label>
-                          <select class="form-control" name="showtime[theater]" id="" required>
-                              <option selected>select</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                            </select>
-                        </div>
-                        
-                        
-                        <div class="form-group">
-                            <label for="">Time : </label>
-                            <input class="form-control mr-sm-2" type="time" name="showtime[time]" id="" required>
-                        </div>
-
-                        <button class="btn btn-success">Add New</button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-
-
-                        <% allCinema.forEach(allCinema => { %>
-                          <% if(allCinema.showtimes.length && allMovie.showtimes.length ) {%>
-                            <h4><%= allCinema.name %></h4>
-                                <% allMovie.showtimes.forEach(function(showtimes){  %>
-                                  <% if(allCinema.name == showtimes.cinema.name){ %> 
-                                    <div class="btn-group">
-                                      <button type="button" disabled class="btn btn-primary"><%= showtimes.cinema.theater %> </button>
-                                      <a class="btn btn-info" href="/booking/<%= allMovie._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
-                                      
-                                      
-                                        <form  style="display: inline;" action="/manage/showtime/<%= showtimes._id %>?_method=DELETE" method="post">
-                                          
-                                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete1">
-                                            <i class="far fa-trash-alt"></i>
-                                          </button>
-                                          <div class="modal fade" id="delete1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content ">
-      <div class="modal-body">
-        <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete this?</h5>
-        <p>This is not something you can undone.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
-                                        </form>
-                                      
-                                    </div>
-                                  <% } %> 
-                              <% }) %> 
-                            <% } %>  
-                        <% }); %>
-            
-                    </div>
-
-
-                  </div>
-                </div>
-                
-                
-
-              </div>
-              
-            </div>
-            
-            <div class="modal fade" id="editmovie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      <form action="/movies/<%= allMovie._id %>?_method=PUT" method="post" enctype="multipart/form-data">
-                          <div class="form-group">
-                              <label for="">Movie's Name</label>
-                              <input type="text" name="movie[name]" id="" class="form-control" placeholder="<%= allMovie.name %>" value="<%= allMovie.name %>"  >
-                          </div>
-                          <div class="form-group">
-                              <label for="">Movie's Teaser</label>
-                              <div class="embed-responsive embed-responsive-16by9">
-                                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= allMovie.teaser %> " allowfullscreen></iframe>
-                              </div>
-                              <input type="text" name="movie[teaser]" id="" class="form-control" value="<%= allMovie.teaser %>" >
-                          </div>
-                          <!-- <div class="form-group">
-                              <label for="">Movie's Genre</label>
-                              <input type="text" name="movie[genre]" id="" class="form-control" placeholder="<%= allMovie.genre %>" value="<%= allMovie.genre %>" >
-                          </div> -->
-                          <div class="form-group">
-                              <label for="">Movie's Rate</label>
-                              <input type="text" name="movie[rate]" id="" class="form-control" placeholder="<%= allMovie.rate %>" value="<%= allMovie.rate %>">
-                          </div>
-                          <div class="form-group">
-                              <label for="">Movie's Time</label>
-                              <input type="text" name="movie[time]" id="" class="form-control" placeholder="<%= allMovie.time %>" value="<%= allMovie.time %>">
-                          </div>
-                          <div class="form-group">
-                              <label for="">Movie's Synosis</label>
-                              <textarea name="movie[synosis]" id="" cols="30" rows="5" class="form-control" placeholder="<%= allMovie.synosis %>"><%= allMovie.synosis %></textarea>
-                          </div>
-                          <div class="form-group">
-                              <label for="">Movie's Director</label>
-                              <input type="text" name="movie[director]" id="" class="form-control" placeholder="<%= allMovie.director %>" value="<%= allMovie.director %>">
-                          </div>
-                          <div class="form-group">
-                              <label for="">Movie's Cast&Crew</label>
-                              <input type="text" name="movie[cast]" id="" class="form-control" placeholder="<%= allMovie.cast %>" value="<%= allMovie.cast %>" >
-                          </div>
-                          <div class="form-group">
-                              <label for="">Movie's Poster</label>
-                              <img style="max-height: 200px; border: solid;" src="<%= allMovie.poster %> " alt="">
-                              <input type="hidden" name="poster" id="" class="form-control" accept="image/*" value="<%= allMovie.poster %>" >
-          
-                          </div>
-                          <div class="form-group">
-                              <label for="">Movie's Wide-Poster</label><br>
-                              <img style="max-width: 460px; border: solid;" src="<%= allMovie.widePoster %> " alt="">
-                              <input type="file" name="poster" id="" class="form-control" accept="image/*" value="<%= allMovie.widePoster %>" >
-          
-                          </div>
-                          <!-- <div class="form-group">
-                              <label for="">Movie's Release Date</label>
-                              <input type="date" name="movie[date]" id="" class="form-control" value="<%= allMovie.date %>" >
-                          </div> -->
-                          <input type="submit" value="Submit" class="btn btn-primary my-2">
-                          
-                      </form>
-                  </div>
-          
-                </div>
-              </div>
-            </div>
-
-            <% }) %>
+          <div class="row">
+            <div class="col-1"><h6>#</h6></div>
+            <div class="col-5"><a href="#"><h6>Name</h6></a></div>
+            <div class="col-2"><a href="#"><h6>Release Date</h6></a></div>
           </div>
+        
+      </div>
+      </div>
+      <% var i=1 %> 
+      <% allMovie.forEach(allMovie => { %>
+      <div class="card">
+        <div class="card-header " id="headingOne">
+          
 
+            <div class="row">
+              <div class="col-1"><h6><%=i %></h6></div>
+              <div class="col-5"><a class="text-dark" href="/movies/<%= allMovie._id %>?path=showtime"><%= allMovie.name %></a> </div>
+              <div class="col-2"><%= allMovie.date.toISOString().slice(0, 10) %></div>
+              <div class="col-4 ">
+                <div class="button-groub">
+                  <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">Showtime</button>
+                  
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editmovie">
+                    Edit
+                  </button>
+                  
+                    <form style="display: inline;" action="/movies/<%= allMovie._id %>?_method=DELETE" method="post">
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete<%=i%>">
+                        Delete
+                      </button>
+                      
+                    <div class="modal fade" id="delete<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content ">
+                    <div class="modal-body">
+                      <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete <%=allMovie.name%> ?</h5>
+                      <p>This is not something you can undone.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                    </form>
+                  
+                </div>
+              </div>
+            </div>
+          
+        </div>
+    
+        <div id="collapseOne<%= i++ %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <form class="form-inline" action="/manage/movie/<%= allMovie._id %> " method="post">
+            
+                  <div class="form-group mr-sm-2">
+                    <label for="">Cinema : </label>
+                    <select class="form-control" name="showtime[cinema]" id="" required>
+                        <option selected>select</option>
+                        <% allCinema.forEach(allCinema => { %>
+                          <option value="<%= allCinema._id  %>"><%= allCinema.name  %> </option>       
+                        <% }) %> 
+                      </select>
+                  </div>
+
+                  <div class="form-group mr-sm-2">
+                    <label for="">Theater : </label>
+                    <select class="form-control" name="showtime[theater]" id="" required>
+                        <option selected>select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                  </div>
+                  
+                  
+                  <div class="form-group">
+                      <label for="">Time : </label>
+                      <input class="form-control mr-sm-2" type="time" name="showtime[time]" id="" required>
+                  </div>
+
+                  <button class="btn btn-success">Add New</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+
+                  <% var j=0 %> 
+                  <% allCinema.forEach(allCinema => { %>
+                     
+                    <% if(allCinema.showtimes.length && allMovie.showtimes.length ) {%>
+                      <h4><%= allCinema.name %></h4>
+                          <% allMovie.showtimes.forEach(function(showtimes){  %>
+                            <% if(allCinema.name == showtimes.cinema.name){ %> 
+                              <div class="btn-group">
+                                <button type="button" disabled class="btn btn-primary"><%= showtimes.cinema.theater %> </button>
+                                <a class="btn btn-info" href="/booking/<%= allMovie._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
+                                
+                                
+                                  <form  style="display: inline;" action="/manage/showtime/<%= showtimes._id %>?_method=DELETE" method="post">
+                                    
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%= j%>">
+                                      <i class="far fa-trash-alt"></i>
+                                    </button>
+<div class="modal fade" id="delete-<%= j%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content ">
+<div class="modal-body">
+  <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete this?</h5>
+  <p>This is not something you can undone.</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-danger">Delete</button>
+</div>
+</div>
+</div>
+</div>
+                                  </form>
+                                
+                              </div>
+                            <% } %> 
+                        <% }) %> 
+                      <% } %>
+                      <% j++ %>   
+                  <% }); %>
+      
+              </div>
+
+
+            </div>
+          </div>
+          
+          
+
+        </div>
+        
+      </div>
+      
+      <div class="modal fade" id="editmovie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Movie</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="/movies/<%= allMovie._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="">Movie's Name</label>
+                        <input type="text" name="movie[name]" id="" class="form-control" placeholder="<%= allMovie.name %>" value="<%= allMovie.name %>"  >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Movie's Teaser</label>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= allMovie.teaser %> " allowfullscreen></iframe>
+                        </div>
+                        <input type="text" name="movie[teaser]" id="" class="form-control" value="<%= allMovie.teaser %>" >
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="">Movie's Genre</label>
+                        <input type="text" name="movie[genre]" id="" class="form-control" placeholder="<%= allMovie.genre %>" value="<%= allMovie.genre %>" >
+                    </div> -->
+                    <div class="form-group">
+                        <label for="">Movie's Rate</label>
+                        <input type="text" name="movie[rate]" id="" class="form-control" placeholder="<%= allMovie.rate %>" value="<%= allMovie.rate %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Movie's Time</label>
+                        <input type="text" name="movie[time]" id="" class="form-control" placeholder="<%= allMovie.time %>" value="<%= allMovie.time %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Movie's Synosis</label>
+                        <textarea name="movie[synosis]" id="" cols="30" rows="5" class="form-control" placeholder="<%= allMovie.synosis %>"><%= allMovie.synosis %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Movie's Director</label>
+                        <input type="text" name="movie[director]" id="" class="form-control" placeholder="<%= allMovie.director %>" value="<%= allMovie.director %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Movie's Cast&Crew</label>
+                        <input type="text" name="movie[cast]" id="" class="form-control" placeholder="<%= allMovie.cast %>" value="<%= allMovie.cast %>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Movie's Poster</label>
+                        <img style="max-height: 200px; border: solid;" src="<%= allMovie.poster %> " alt="">
+                        <input type="hidden" name="poster" id="" class="form-control" accept="image/*" value="<%= allMovie.poster %>" >
+    
+                    </div>
+                    <div class="form-group">
+                        <label for="">Movie's Wide-Poster</label><br>
+                        <img style="max-width: 460px; border: solid;" src="<%= allMovie.widePoster %> " alt="">
+                        <input type="file" name="poster" id="" class="form-control" accept="image/*" value="<%= allMovie.widePoster %>" >
+    
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="">Movie's Release Date</label>
+                        <input type="date" name="movie[date]" id="" class="form-control" value="<%= allMovie.date %>" >
+                    </div> -->
+                    <input type="submit" value="Submit" class="btn btn-primary my-2">
+                    
+                </form>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+
+      <% }) %>
     </div>
+
+</div>
+
+
 
 <script>
      

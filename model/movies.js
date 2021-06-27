@@ -20,12 +20,12 @@ var moviesSchema = new mongoose.Schema({
             ref: 'Comment'
         }
     ],
-    // showtimes: [
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'Showtime'
-    //     }
-    // ],
+    showtimes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Showtime'
+        }
+    ],
     boxoffice: {
         domestic : { type: Number, default: 0 },
         international: { type: Number, default: 0 },

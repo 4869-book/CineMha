@@ -25,7 +25,13 @@ var showtimeSchema = new mongoose.Schema({
         ['E0',  'E1',  'E2',  'E3',  'E4',  'E5'],
         ['F0',  'F1',  'F2',  'F3',  'F4',  'F5'],
         ['G0',  'G1',  'G2',  'G3',  'G4',  'G5'],
-        ]} 
+        ]},
+    booking: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Booking'
+        }
+    ] 
 });
 
 module.exports = mongoose.model('Showtime',showtimeSchema); 

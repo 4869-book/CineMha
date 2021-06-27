@@ -123,6 +123,7 @@
             <form action="/booking/payment/<%= foundShowtime._id %>" method="post">
               <input type="hidden" name="booking[showtime_id]" value="<%= foundShowtime._id %> "> 
               <input type="hidden" name="booking[name]" value="<%= foundShowtime.movie.name %>">
+              <input type="hidden" name="booking[time]" value="<%= foundShowtime.time %>">
               <!-- <input type="hidden" name="booking[day]"> -->
               <input type="hidden" name="booking[location] " value="<%= foundShowtime.cinema.theater %>">
 
@@ -159,7 +160,8 @@ const movieSelect = document.getElementById('movie');
 const submitbtn = document.getElementById('submit');
 
 // let ticketPrice = +movieSelect.value;
-
+var items = [];
+submitbtn.disabled=true;
 //Update total and count
 function updateSelectedCount() {
   const selectedSeats1 = document.querySelectorAll('.premium.selected');
@@ -169,9 +171,15 @@ function updateSelectedCount() {
   console.log(selectedSeatsCount1+' '+selectedSeatsCount2)
   $('#price').text((selectedSeatsCount1*160)+(selectedSeatsCount2*100));
   price2.value=(selectedSeatsCount1*160)+(selectedSeatsCount2*100)
+  if(items.length!=0){
+    submitbtn.disabled=false;
+  }
+  if(items.length==0){
+    submitbtn.disabled=true;
+  }
   // total.innerText = selectedSeatsCount * 100;
 }
-var items = [];
+
 
 //Seat click event
 container.addEventListener('click', e => {

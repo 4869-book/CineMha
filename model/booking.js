@@ -1,15 +1,12 @@
 var mongoose = require('mongoose');
 
 var bookingSchema = new mongoose.Schema({
-    showtimes: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Showtime'
-        }
-    ],
-    seat:String,
+    wideposter: String,
+    name: String,
+    seat:[{type:String}],
     total:String,
-    time:String
+    time:String,
+    ref:String
 });
 
 module.exports = mongoose.model('Booking',bookingSchema);

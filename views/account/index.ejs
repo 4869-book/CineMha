@@ -5,11 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    
+    
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
     <title>Account</title>
 </head>
 <body>
@@ -51,14 +49,14 @@
                         <div class="row">
                             <% collection.mylists.forEach(collection => { %> 
                             
-                              <div class="col col-md-6">
+                              <div class="col-lg-6 col-sm-12 mb-3">
                                 <div class="col">
                                     <a href="/movies/<%= collection._id %>/?path=showtime">
-                                        <div class="card bg-secondary border-secondary mb-1" style="max-width: 18rem; height: 25rem;">
+                                        <div class="card bg-secondary border-secondary mb-1" >
                                             <div class="text-center">
                                                 <p class="card-header text-light"><%= collection.name %></p>
                                               </div>
-                                            <div class="card-body"><img style="height: 20rem;" src="<%= collection.poster %>" class="card-img-top" alt="..."></div>
+                                            <div class="card-body"><img  src="<%= collection.poster %>" class="card-img-top" alt="..."></div>
                                             
                                           </div>
                                     </a>  
@@ -83,8 +81,42 @@
                                     <h5>BOOKING HISTORY</h5>
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title "></h5>
-                                    <p class="card-text"></p>
+                                    <div class="row">
+                                        <% collection.booking.forEach(element => { %>
+                                        <div class="col-lg-6 col-sm-12 mb-3">
+                                            <div class="card border-secondary" style="min-width: 15rem;">
+                                                <img class="card-img-top" src="<%= element.wideposter %> " alt="Card image cap">
+                                                <div class="card-body">
+                                                  <h4><%= element.name %></h4>
+                                                  <div class="row">
+                                                      <div style="border-right: solid;" class="col-4 text-center">
+                                                          <h5>DATE</h5>
+                                                          <p>24 May</p>
+                                                      </div>
+                                                      <div style="border-right: solid;" class="col-4 text-center">
+                                                        <h5>TIME</h5>
+                                                        <p><%= element.time %></p>
+                                                    </div>
+                                                    <div class="col-4 text-center">
+                                                        <h5>SEAT</h5>
+                                                        <p><%= element.seat %></p>
+                                                    </div>
+                                                  </div>
+        
+                                                    <div class="text-center">
+                                                        <svg  class="barcode"
+                                                            jsbarcode-value="<%= element.ref %>">
+                                                        </svg>
+                                                    </div>
+        
+                                                </div>
+                                              </div>
+                                            </div>
+    
+                                        <% }) %>
+                                    </div>
+                                    
+
                                 </div>
                         </div>
                       
@@ -124,3 +156,10 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+    JsBarcode(".barcode").options({
+        height:25,
+        lineColor:"black",
+        fontSize:14
+        }).init();
+</script>

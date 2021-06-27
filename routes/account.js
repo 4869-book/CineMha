@@ -28,12 +28,12 @@ var User = require('../model/user');
 
 /* GET home page. */
 router.get('/',middleware.isLoggedIn, function(req, res, next) {
-    User.findById(req.user._id).populate('mylists').exec(function(err, foundMylist){
+    User.findById(req.user._id).populate('mylists').populate('booking').exec(function(err, foundUser){
         if(err){
             console.log(err);
         } else {
           
-          res.render('account/index.ejs',{collection: foundMylist, query: req.query });
+          res.render('account/index.ejs',{collection: foundUser, query: req.query });
         }
     });  
 });

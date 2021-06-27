@@ -6,6 +6,18 @@ var Movie = require('../model/movies');
 var Showtime = require('../model/showtime');
 const user = require('../model/user');
 var User = require('../model/user');
+var Booking =require('../model/booking')
+
+function makeRef(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
 
 
 router.get('/:Movie_id/:showtime_id', function(req, res){
@@ -40,7 +52,7 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
   });
 
   router.post('/payment/:showtime_id/:userid/confirm',middleware.isLoggedIn, function(req, res){
-     console.log(req.body.booking);
+    var ref = makeRef(5);
      Showtime.findById(req.params.showtime_id).exec(function(err,foundShowtime){
       for (let x = 0; x < foundShowtime.seat.length; x++) {
         for(let y = 0; y < foundShowtime.seat[x].length;y++){
@@ -51,18 +63,39 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
           });        
         }
       }  
+
       Showtime.findByIdAndUpdate(req.params.showtime_id,foundShowtime).exec(function(err,newShowtime){
         if(err){
           console.log(err);
         }else{
-          // User.findById(req.params.userid).exec(function(err,foundUser){
-          //   if(err){
-          //     console.log()
-          //   }
-          // })
-          res.redirect('/booking/'+foundShowtime.movie.id+'/'+req.params.showtime_id);
+          User.findById(req.params.userid).exec(function(err,foundUser){
+            if(err){
+              console.log(err)
+            }else{
+              console.log('successfuly')
+            }
+          })
+          
         }
       })
+
+
+      Booking.create(req.body.booking,function(err,newlyCreated){
+          
+          if(err){
+            console.log(err+"bruh")
+          }else{
+            console.log(req.body.booking.showtime_id)
+            foundShowtime.booking.push(newlyCreated);
+            foundShowtime.save();
+            req.user.booking.push(newlyCreated)
+            req.user.save();
+            newlyCreated.ref=ref;
+            newlyCreated.save();
+            res.redirect('/booking/'+foundShowtime.movie.id+'/'+req.params.showtime_id);
+          }
+        })
+
     })
  });
  

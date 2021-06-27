@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var cinemasSchema = new mongoose.Schema({
     name: String,
     location: String,
-    city: String,
     theater: String,
     picture: String,
     showtimes: [

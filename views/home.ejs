@@ -17,17 +17,17 @@
         <div class="container">
           <div class="card-header">
             <h1>Now in Theaters</h1>
-            <div class="row row-cols-lg-4 row-cols-2 row-cols-md-3 ">
+            <div class="row justify-content-center">
             <% allMovie.forEach(collection => { %>
               <% if (collection.showtimes.length!=0) { %>
-                <div class="col">
+                <div class="col-md-4 col-sm-6 col-12">
                   <a href="/movies/<%= collection._id %>/?path=showtime">
-                      <div class="card bg-secondary border-secondary mb-1" style="max-width: 18rem; height: 70%;">
+                      <div class="card bg-secondary border-secondary mb-1" >
                           <div class="text-center">
                               <p class="card-header text-light"><%= collection.name %></p>
                               <!-- <p class="card-text text-light mt-3"><%= collection.date.toISOString().slice(0, 10) %></p> -->
                             </div>
-                          <div class="card-body"><img src="<%= collection.poster %>" class="card-img-top" style="height: 20rem;" alt="..."></div>
+                          <div class="card-body"><img src="<%= collection.poster %>" class="card-img-top"  alt="..."></div>
                           
                         </div>
                   </a>     
@@ -35,7 +35,7 @@
                 <% } %>
             <% }) %>
           </div>
-          <div class="py-5 text-right"><a href="/movies?path=showtime" class="btn btn-dark px-5 py-3 text-uppercase">Show me more</a></div>
+          <div class="py-5 text-right"><a href="/movies/now" class="btn btn-dark px-5 py-3 text-uppercase">Show me more</a></div>
           </div>
           
         </div>

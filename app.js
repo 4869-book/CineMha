@@ -31,6 +31,7 @@ var manageRouter = require('./routes/manage');
 var bookingRouter = require('./routes/booking');
 
 
+
 var app = express();
 
 var session = require('express-session');

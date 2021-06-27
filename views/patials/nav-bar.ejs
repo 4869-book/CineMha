@@ -26,7 +26,7 @@
           </li>
   
           <li class="nav-item">
-            <a class="nav-link" href="/movies">MOVIE</a>
+            <a class="nav-link" href="/movies/now">MOVIE</a>
           </li>
   
           <li class="nav-item">
@@ -40,12 +40,15 @@
           <li class="nav-item">
             <a class="nav-link" href="/news">NEWS</a>
           </li> -->
-          <form class="form-inline my-2 my-lg-0 " action="/home/search" method="POST">
-            <input class="form-control mr-sm-2" type="search" placeholder="Movie or Cinema" aria-label="Search" name="key" required>
           
-              <button class=" btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             
-          </form>
+              <form class="form-inline " action="/home/search" method="POST">
+                <div class="form-group col-md-12">
+                <input class="form-control mr-sm-2" type="search" placeholder="Movie or Cinema" aria-label="Search"  name="key" required>
+              </div>
+              </form>
+            
+          
           
           
             <% if(!currentUser) { %> 

@@ -41,10 +41,6 @@
                         <input type="text" name="collection[location]" id="" class="form-control" value="<%=allCinema.location %>" >
                     </div>
                     <div class="form-group">
-                        <label for="">Cinema's City</label>
-                        <input type="text" name="collection[city]" id="" class="form-control" value="<%=allCinema.city %>" >
-                    </div>
-                    <div class="form-group">
                         <label for="">Cinema's Theater Number</label>
                         <input type="text" name="collection[theater]" id="" class="form-control" value="<%=allCinema.theater %>">
                     </div>
@@ -146,7 +142,44 @@
               <div class="row">
                 <div class="col-12">
                   
-                  
+                  <% var j=0 %> 
+                  <% allMovie.forEach(allMovie => { %>
+                    <% if(allMovie.showtimes.length && allMovie.showtimes.length ) {%>
+                      <h4><%= allMovie.name %></h4>
+                          <% allMovie.showtimes.forEach(function(showtimes){  %>
+                            <% if(allMovie.name == showtimes.movie.name){ %> 
+                              <div class="btn-group">
+                                <button type="button" disabled class="btn btn-primary"><%= showtimes.cinema.theater %> </button>
+                                <a class="btn btn-info" href="/booking/<%= allMovie._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
+                                
+                                
+                                  <form  style="display: inline;" action="/manage/showtime/<%= showtimes._id %>?_method=DELETE" method="post">
+                                    
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=j %>">
+                                      <i class="far fa-trash-alt"></i>
+                                    </button>
+<div class="modal fade" id="delete-<%=j %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content ">
+<div class="modal-body">
+  <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete this?</h5>
+  <p>This is not something you can undone.</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-danger">Delete</button>
+</div>
+</div>
+</div>
+</div>
+                                  </form>
+                                
+                              </div>
+                            <% } %> 
+                        <% }) %> 
+                      <% } %>
+                      <%j++ %> 
+                  <% }); %>
                   
                 </div>
 

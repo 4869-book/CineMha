@@ -36,7 +36,7 @@ function getId(url) {
     : null;
 }
 
-router.get('/', function(req, res, next) {
+router.get('/now', function(req, res, next) {
   var mysort = {date:1};
   if(req.query.sort=="Name"){
     mysort = {name:1};
@@ -50,7 +50,26 @@ router.get('/', function(req, res, next) {
   if(err){
       console.log(err);
   } else {
-      res.render('movies/index.ejs', {collection: allMovies, query: req.query});
+      res.render('movies/now.ejs', {collection: allMovies, query: req.query});
+  }
+  }).sort(mysort);
+});
+
+router.get('/coming', function(req, res, next) {
+  var mysort = {date:1};
+  if(req.query.sort=="Name"){
+    mysort = {name:1};
+  }else if(req.query.sort=="Date"){
+    mysort = {date:1};
+  }else if(req.query.sort=="Rating"){
+    mysort = {rating:1};
+  }
+
+  Movie.find({},function(err, allMovies){
+  if(err){
+      console.log(err);
+  } else {
+      res.render('movies/coming.ejs', {collection: allMovies, query: req.query});
   }
   }).sort(mysort);
 });
@@ -166,6 +185,22 @@ router.delete('/:movie_id',function(req, res){
       res.redirect('/manage'+'?path=allMovie');
     }else {
       res.redirect('/manage?path=allMovie');
+    }
+  })
+})
+
+router.delete('/comment/:comment_id/:movie_id',function(req, res){
+  Comment.findByIdAndRemove(req.params.comment_id,function(err,delcomment){
+    if(err){
+      console.log(err)
+    }else {
+      Movie.findByIdAndUpdate(req.params.movie_id,{$pull:{comments:delcomment._id}},function(err){
+        if(err){
+          console.log(err)
+        }else{
+          res.redirect('back')
+        }
+      })
     }
   })
 })

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+   
+
+    
+
+    <title>Movies</title>
+</head>
+<body>
+    <%- include('../patials/nav-bar.ejs')  %>
+    
+	<div class="container pt-4 text-center">
+		<div class="btn-group btn-group-toggle " data-toggle="buttons">
+			<a class="btn btn-secondary active text-light" href="/movies/now">Now Showing</a>		
+			<a class="btn btn-secondary text-light" href="/movies/coming">Coming Soon</a>
+		  </div>
+	</div>
+	
+
+    <div class="wrapper">
+        <div class="container py-1">
+            <%- messages() %> 
+			
+				<div class="text-right">
+					<div class="dropdown">
+						<button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Sort by : <%= query.sort %> 
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="">Select</a>
+						  	<a class="dropdown-item" href="?sort=Name">Name</a>
+						 	<a class="dropdown-item" href="?sort=Date">Date</a>
+						  	<a class="dropdown-item" href="?sort=Rating">Rating</a>
+						</div>
+					  </div>
+				
+				<div class="row justify-content-center">
+					<% collection.forEach(collection => { %> 
+					<% if (collection.showtimes.length!=0) { %>
+						<div class="col-md-4 col-sm-6 col-12">
+							<a href="/movies/<%= collection._id %>/?path=showtime">
+								<div class="card bg-secondary border-secondary mt-3 text-center">
+									
+									<h6 class="card-header text-light"><%= collection.name %></h6>
+									
+									<div class=""><img src="<%= collection.poster %>" class="card-img-top" alt="..."></div>
+									
+									<p class="card-header text-light"><%= collection.date.toISOString().slice(0, 10) %></p>
+									
+									
+								  </div>
+							</a>     
+						  </div>
+					  <% } %> 
+					<% }); %>    
+				 </div>
+			</div>
+	  		
+        </div>
+    </div>
+	
+    
+
+</body>
+
+</html>
+
