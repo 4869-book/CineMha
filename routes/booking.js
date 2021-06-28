@@ -1,12 +1,10 @@
-var express = require('express');
-var router  = express.Router({mergeParams: true});
-
-var middleware = require('../middleware');
-var Movie = require('../model/movies');
-var Showtime = require('../model/showtime');
-const user = require('../model/user');
-var User = require('../model/user');
-var Booking =require('../model/booking')
+var express = require('express'),
+  router  = express.Router({mergeParams: true}),
+  middleware = require('../middleware'),
+  Movie = require('../model/movies'),
+  Showtime = require('../model/showtime'),
+  User = require('../model/user'),
+  Booking =require('../model/booking')
 
 function makeRef(length) {
   var result           = '';
@@ -92,7 +90,7 @@ router.get('/:Movie_id/:showtime_id', function(req, res){
             req.user.save();
             newlyCreated.ref=ref;
             newlyCreated.save();
-            res.redirect('/booking/'+foundShowtime.movie.id+'/'+req.params.showtime_id);
+            res.redirect('/account?path=booking');
           }
         })
 

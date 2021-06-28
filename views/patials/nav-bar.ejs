@@ -17,9 +17,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto text-right">
   
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="/manage/2">manage2</a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a class="nav-link" href="/">HOME</a>
@@ -44,9 +44,30 @@
             
               <form class="form-inline " action="/home/search" method="POST">
                 <div class="form-group col-md-12">
-                <input class="form-control mr-sm-2" type="search" placeholder="Movie or Cinema" aria-label="Search"  name="key" required>
+                <input class="form-control mr-sm-2" type="search" placeholder='Movie Search'  aria-label="Search"  name="key" required>
               </div>
               </form>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-filter"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/home/filter?filter=Action">Action</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Adventure">Adventure</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Animated">Animated</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Comedy">Comedy</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Crime">Crime</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Drama">Drama</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Historical">Historical</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Horror">Horror</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Musical">Musical</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Mystery">Mystery</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Science">Science fiction(Sci-Fi)</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Thriller">Thriller</a>
+                  <a class="dropdown-item" href="/home/filter?filter=Western">Western</a>
+                  
+              </li> 
             
           
           

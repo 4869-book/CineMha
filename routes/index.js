@@ -5,11 +5,17 @@ var Movie = require('../model/movies');
 var passport = require('passport');
 
 router.get('/', function(req, res, next) {
-  Movie.find({}).limit(6).sort({name:1}).exec(function(err,allMovie){
+  Movie.find({}).sort({name:1}).exec(function(err,allMovie){
     if(err){
       console.log(err);
     }else{
-      res.render('home.ejs',{allMovie:allMovie});
+      Movie.find({}).sort({'boxoffice.worldwide':-1}).exec(function(err,boxoffice){
+        if(err){
+          console.log(err);
+        }else{
+          res.render('home.ejs',{allMovie:allMovie,boxoffice:boxoffice});
+        }
+      })
     }
   })
 });

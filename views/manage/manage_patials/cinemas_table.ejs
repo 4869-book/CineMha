@@ -1,15 +1,9 @@
-
-
-
-    <div  class="container">
+<div  class="container">
 
       <div class="accordion" id="accordionExample">
         <div class="card">
           <div class="card-header " id="headingOne">
-            
-            <!-- <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">
-              Collapsible Group Item #<%= i  %>
-            </button> -->
+
             <div class="row">
               <div class="col-1"><h6>#</h6></div>
               <div class="col-5"><h6>Name</h6></div>
@@ -59,10 +53,7 @@
 
         <div class="card">
           <div class="card-header " id="headingOne">
-            
-              <!-- <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseOne<%= i  %>" aria-expanded="true" aria-controls="collapseOne">
-                Collapsible Group Item #<%= i  %>
-              </button> -->
+
               <div class="row">
                 <div class="col-1"><h6><%=i %></h6></div>
                 <div class="col-5"><a class="text-dark" href="/cinemas/<%= allCinema._id %>?path=showtime"><%= allCinema.name %></a> </div>
@@ -116,19 +107,6 @@
                           <% }) %> 
                         </select>
                     </div>
-
-                    <!-- <div class="form-group mr-sm-2">
-                      <label for="">Theater : </label>
-                      <select class="form-control" name="showtime[theater]" id="">
-                          <option selected>select</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                        </select>
-
-                  </div> -->
         
                     <div class="form-group">
                         <label for="">Time : </label>
@@ -158,20 +136,20 @@
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<%=j %>">
                                       <i class="far fa-trash-alt"></i>
                                     </button>
-<div class="modal fade" id="delete-<%=j %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-<div class="modal-content ">
-<div class="modal-body">
-  <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete this?</h5>
-  <p>This is not something you can undone.</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-  <button type="submit" class="btn btn-danger">Delete</button>
-</div>
-</div>
-</div>
-</div>
+                                    <div class="modal fade" id="delete-<%=j %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content ">
+                                          <div class="modal-body">
+                                            <h5 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Delete this?</h5>
+                                            <p>This is not something you can undone.</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                                   </form>
                                 
                               </div>

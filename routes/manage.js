@@ -8,29 +8,6 @@ var Comment = require('../model/comment');
 var Showtime = require('../model/showtime')
 var middleware = require('../middleware');
 
-
-router.get('/2/', function(req, res){
-  Movie.find({}).sort({name:1}).populate('showtimes').exec(function(err, allMovie){
-    if(err){
-        console.log(err);
-    } else {
-      Cinema.find({}).sort({name:1}).populate('showtimes').exec(function(err, allCinema){
-        if(err){
-            console.log(err);
-        } else {
-          User.find({}).sort({name:1}).exec(function(err, allUser){
-            if(err){
-                console.log(err);
-            } else {
-              res.render('manage/index2.ejs', {allMovie: allMovie, allCinema:allCinema, allUser:allUser, query: req.query});
-            }
-        });
-        }
-    });
-    }
-});
-});
-
 router.get('/', function(req, res){
   Movie.find({}).sort({name:1}).populate('showtimes').exec(function(err, allMovie){
     if(err){
@@ -51,6 +28,66 @@ router.get('/', function(req, res){
     });
     }
 });
+});
+
+function addMinutes(time, minsToAdd) {
+  function D(J){ return (J<10? '0':'') + J;};
+  var piece = time.split(':');
+  var mins = piece[0]*60 + +piece[1] + +minsToAdd;
+
+  return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);  
+} 
+
+router.post('/movie/auto/:id', function(req, res){
+var timestart = req.body.time
+  
+  Movie.findById(req.params.id).exec(function(err, foundMovie){
+      var addTime = 150
+      if(err){
+        console.log(err);
+      }else{
+        Cinema.findById(req.body.auto.cinema, function(err, foundCinema){
+          if(err){
+            console.log(err);
+            res.redirect('/manage');
+          }else {
+          
+            for (let index = 0; index < req.body.round; index++) {
+              Showtime.create(req.body.auto, function(err, showtime){
+                if(err) {
+                   console.log(err);
+                } else {
+                  showtime.time=timestart
+                  showtime.movie.id = foundMovie._id;
+                  showtime.movie.name = foundMovie.name;
+                  showtime.cinema.id = foundCinema._id;
+                  showtime.cinema.name = foundCinema.name;
+                  showtime.cinema.theater = req.body.auto.theater;
+                  showtime.save();
+                        
+                  console.log(timestart)
+                  timestart=addMinutes(timestart,addTime);
+                  Movie.findByIdAndUpdate(req.params.id,{$push:{showtimes:showtime}},function(err){
+                    if(err){
+                      console.log(err);
+                    }
+                      })
+                    Cinema.findByIdAndUpdate(req.body.auto.cinema,{$push:{showtimes:showtime}},function(err){
+                      if(err){
+                        console.log(err);
+                        }
+                      })
+                    }
+                });     
+          }
+          
+          res.redirect('/manage/2'+ "?path=allMovie");
+        }
+
+      })
+    }
+    
+  })
 });
 
 router.post('/movie/:id', middleware.isLoggedIn, function(req, res){

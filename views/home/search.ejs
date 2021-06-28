@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
 </head>
 <body>
     <%- include('../patials/nav-bar.ejs')  %>
@@ -36,29 +36,6 @@
             <% } %> 
        </div>
    </div>
-   <!-- <div class="wrapper">
-    <div class="container py-3">
-        <h1>Cinema:</h1>
-        <% if (cinemaSearch.length!=0) { %>
-            <% cinemaSearch.forEach(collection => { %>
-                <div class="card mx-auto container-fluid my-3" style="max-width: 720px;">
-                    <div class="row no-gutters">
-                      <div class="col-md-4 my-2 pl-2">
-                        <img src="<%= collection.picture %>" class="card-img" alt="...">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h4 class="card-title"><a href="/cinemas/<%= collection._id %>"><%= collection.name %></a> </h4>
-                          <p class="card-text"><%=  collection.location%>,<%=" "+collection.city %>  </p>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                <% }); %>  
-        <% }else{ %>
-            <h1>Cinema not found</h1>
-            <% } %>  %>
-    </div>
-</div> -->
+   
 </body>
 </html>

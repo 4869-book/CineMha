@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    
-    
     <script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
     <title>Account</title>
 </head>
@@ -90,15 +88,21 @@
                                                   <h4><%= element.name %></h4>
                                                   <div class="row">
                                                       <div style="border-right: solid;" class="col-4 text-center">
-                                                          <h5>DATE</h5>
-                                                          <p>24 May</p>
+                                                          <h6>DATE</h6>
+                                                          <p>28 Jun</p>
                                                       </div>
                                                       <div style="border-right: solid;" class="col-4 text-center">
-                                                        <h5>TIME</h5>
-                                                        <p><%= element.time %></p>
+                                                        <div class="col">
+                                                            <h6>TIME</h6>
+                                                            <p><%= element.time %></p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <h6>CINEMA</h6>
+                                                            <p><%= element.theater %></p>
+                                                        </div>
                                                     </div>
                                                     <div class="col-4 text-center">
-                                                        <h5>SEAT</h5>
+                                                        <h6>SEAT</h6>
                                                         <p><%= element.seat %></p>
                                                     </div>
                                                   </div>

@@ -89,7 +89,7 @@ router.post('/',upload.array('poster',2), function(req, res){
       console.log(err);
     }else{
       req.flash("error","Add Movie Sucessfully!");
-          res.redirect('/movies');
+          res.redirect('/movies/coming');
           console.log("Add Movie Sucessfully");
     }
   })

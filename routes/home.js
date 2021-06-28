@@ -9,6 +9,18 @@ router.get('/', function(req, res, next) {
   res.render('home');
 });
 
+router.get("/filter", function(req, res){
+  Movie.find({}).exec(function(err,allMovie){
+    if(err){
+      console.log(err);
+    }else{
+      
+          res.render('home/filter.ejs',{allMovie:allMovie,query: req.query})
+      
+    }
+  })
+})
+
 router.get("/search/:key", function(req,res){
   var key = req.params.key;
   var capitalkey = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();

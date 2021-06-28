@@ -4,8 +4,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Home</title>
 </head>
+
+<style>
+  .container {
+    position: relative;
+  }
+  
+  .bottomright {
+  position: absolute;
+  bottom: 8px;
+  right: 5px;
+  font-size: 18px;
+}
+  
+ 
+  </style>
+
 <body>
   <%- include('patials/nav-bar.ejs')  %>
     <%- include('patials/adsSlide2.ejs')  %>
@@ -13,13 +29,16 @@
     <div class="container">
       <%- messages() %>
     </div>
-      <div class="wrapper ">
+      
+    <div class="wrapper ">
         <div class="container">
+          
           <div class="card-header">
             <h1>Now in Theaters</h1>
             <div class="row justify-content-center">
+              <% var flag=1 %> 
             <% allMovie.forEach(collection => { %>
-              <% if (collection.showtimes.length!=0) { %>
+              <% if (collection.showtimes.length!=0&&flag<=3) { %>
                 <div class="col-md-4 col-sm-6 col-12">
                   <a href="/movies/<%= collection._id %>/?path=showtime">
                       <div class="card bg-secondary border-secondary mb-1" >
@@ -32,15 +51,48 @@
                         </div>
                   </a>     
                 </div>
+                <% flag++ %> 
                 <% } %>
             <% }) %>
           </div>
           <div class="py-5 text-right"><a href="/movies/now" class="btn btn-dark px-5 py-3 text-uppercase">Show me more</a></div>
           </div>
-          
         </div>
       </div>
       
+      <div class="wrapper ">
+        <div class="container">
+          
+          <div class="card-header">
+            <h1>Top Box Office</h1>
+            <div class="row justify-content-center">
+              <% var flag=1 %> 
+            <% boxoffice.forEach(collection => { %>
+              <% if (flag<=3) { %>
+                <div class="col-md-4 col-sm-6 col-12">
+                  <a href="/movies/<%= collection._id %>/?path=showtime">
+                      <div class="card bg-secondary border-secondary mb-1" >
+                          <div class="text-center">
+                              <p class="card-header text-light"><%= collection.name %></p>
+                              <!-- <p class="card-text text-light mt-3"><%= collection.date.toISOString().slice(0, 10) %></p> -->
+                            </div>
+                          <div class="card-body">
+                            <img src="<%= collection.poster %>" class="card-img-top"  alt="...">
+                            <div class="bottomright">
+                              <img style="max-width:10rem;" src="/uploads/user/<%= flag %>.png" alt="">
+                               
+                            </div>
+                          </div>
+                          
+                        </div>
+                  </a>     
+                </div>
+                <% flag++ %> 
+                <% } %>
+            <% }) %>
+          
+        </div>
+      </div>
 
     
   </body>

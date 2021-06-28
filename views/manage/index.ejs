@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Managment</title>
 </head>
 <body>
     <%- include('../patials/nav-bar.ejs')  %>
@@ -18,7 +18,9 @@
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="?path=allMovie">All Movies</a>
-                <a class="dropdown-item" href="?path=newMovie">Add new Movie</a>
+                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#newmovie">
+                    Add new Movie
+                  </button>
             </div>
         </div>
 
@@ -28,7 +30,9 @@
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="?path=allCinema">All Cinemas</a>
-                <a class="dropdown-item" href="?path=newCinema">Add new Cinema</a>
+                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#newcinema">
+                    Add new Cinema
+                  </button>
             </div>
         </div>
 
@@ -42,19 +46,13 @@
         </div>
     </div>
 
-    <% if(query.path == 'newMovie') {%> 
-        <%- include('manage_patials/new_movie.ejs')%>
-    <% }else if(query.path == 'newCinema') { %>
-        <%- include('manage_patials/new_cinema.ejs')%>
-    <% }else if(query.path == 'allMovie') { %>
+    <% if(query.path == 'allMovie') { %>
         <%- include('manage_patials/movies_table.ejs')%>
     <% }else if(query.path == 'allCinema') { %>
         <%- include('manage_patials/cinemas_table.ejs')%>
-    <% }else if(query.path == 'editMovie') { %>
-        <%- include('manage_patials/edit_movie.ejs')%>
     <% }else if(query.path == 'allUser') { %>
         <%- include('manage_patials/user_table.ejs')%>
-    <% } %>  %> 
+    <% } %>  %>
 
 </body>
 </html>
@@ -64,3 +62,5 @@
         $('#messages').addClass('alert alert-success');
     })
 </script>
+
+<%- include('modal/modal1.ejs')%>

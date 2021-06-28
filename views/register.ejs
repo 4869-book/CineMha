@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
 </head>
 <body>
     <%- include('patials/nav-bar.ejs')  %>
+
+
 <div class="wrapper">
     <div class="container">
-        <h1>Register</h1>
-        <%- messages() %> 
+        <div class="row">
+            <div class="col-6 text-center">
+                <img class="img-fluid" style="max-width: 36rem;" src="/images/logo.png" alt="">
+            </div>
+            <div style="margin-top: 10rem; margin-bottom: 10rem;" class="col-6">
+                <h1>Register</h1>
+        <%- messages()  %> 
         <form action="/register" method="post">
             <div class="form-group">
                 <input type="text" name="username" id="" class="form-control" placeholder="Username" required>
@@ -28,6 +35,8 @@
             </div>
             
         </form>
+            </div>
+        </div>
     </div>
 </div>
 

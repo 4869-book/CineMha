@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var bookingSchema = new mongoose.Schema({
     wideposter: String,
     name: String,
+    theater: String,
     seat:[{type:String}],
     total:String,
     time:String,

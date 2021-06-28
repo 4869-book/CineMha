@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <%- include('../patials/nav-bar.ejs')  %>
+   <div class="wrapper">
+       <div class="container">
+         <h1><%= query.filter %> </h1>
+           <div class="row row-cols-lg-4 row-cols-2 row-cols-md-3 d-flex justify-content-center">
+            <% allMovie.forEach(element => { %>
+              <% if (element.genre.includes(query.filter)) { %>
+                <div class="col">
+                  <a href="/movies/<%= element._id %>/?path=showtime">
+                      <div class="card bg-secondary border-secondary mb-1" style="max-width: 18rem; height: 70%;">
+                          <div class="text-center">
+                              <p class="card-header text-light"><%= element.name %></p>
+                              <p class="card-text text-light mt-3"><%= element.date.toISOString().slice(0, 10) %></p>
+                            </div>
+                          <div class="card-body"><img src="<%= element.poster %>" class="card-img-top" alt="..."></div>
+                          
+                        </div>
+                  </a>     
+                </div>
+              <% } %>
+             <% }) %>
+           </div>
+       </div>
+   </div>
+
+</body>
+</html>

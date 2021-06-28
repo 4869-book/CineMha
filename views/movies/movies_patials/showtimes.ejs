@@ -15,34 +15,6 @@
     </div>
 
 <div class="row mx-auto py-3 px-3">
-
-  <!-- <% foundCinema.forEach(foundCinema => { %>
-    <% if(foundCinema.showtimes.length && collection.showtimes.length) {%>
-      <div class="card mx-auto mt-2 col-12">
-        <div class="card-body">
-          <h4 class="card-title"><%= foundCinema.name + foundCinema.showtimes._id + collection.showtimes._id%></h4>
-
-          <% collection.showtimes.forEach(function(showtimes){  %>
-            <% if(foundCinema.name == showtimes.cinema.name){ %>   
-                
-                <a class="btn btn-info" href="/booking/<%= collection._id %>/<%= showtimes._id %>  "><%= showtimes.time %></a>
-              
-            <% } %> 
-        <% }) %>
-        </div>
-    </div>
-      <% } %>  
-  <% }); %> -->
-
-   
-   <!-- <% foundShowtime.forEach(foundShowtime => { %>
-    <%=foundShowtime.cinema.name %> 
-    <% collection.showtimes.forEach(movieShowtime => { %>
-      <% if (foundShowtime._id.equals(movieShowtime._id)) { %>
-           <%= foundShowtime.time %>
-      <% } %>
-     <% }) %> 
-   <% }) %>  -->
   
   <% var flag=0 %> 
   <% foundCinema.forEach(foundCinema => { %>

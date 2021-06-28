@@ -44,7 +44,7 @@
                   <h2 class="card-title"><%= collection.name %> </h2>
                   <p><i class="fas fa-tags">
                     <% collection.genre.forEach(element => { %>
-                    </i> <a href="#"><%=element%></a>, 
+                    </i> <a href="/home/filter?filter=<%=element%>"><%=element%></a>, 
                     <% }) %> 
                   </p>
               <p class="card-text"><%= collection.synosis %></p>

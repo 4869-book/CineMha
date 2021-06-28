@@ -1,29 +1,24 @@
-var express = require('express');
-var router  = express.Router({mergeParams: true});
-var multer = require('multer');
-var path = require('path');
-var storage = multer.diskStorage({
+var express = require('express'),
+  router  = express.Router({mergeParams: true}),
+  multer = require('multer'),
+  path = require('path'),
+  storage = multer.diskStorage({
             destination: function(req, file, callback){
             callback(null,'./public/uploads/user/');
           },
       filename: function(req, file, callback){
       callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
      }
-        });
-var imageFilter = function (req, file, callback){
-  if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-      return callback(new Error('Only JPG, jpeg, PNGm and GIF image files are allowed!'), false);
-  }
-  callback(null, true);
-};
-
-var upload  = multer({storage: storage, fileFilter: imageFilter});
-
-
-
-var middleware = require('../middleware');
-var Movie = require('../model/movies');
-var User = require('../model/user');
+        }),
+  imageFilter = function (req, file, callback){
+    if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return callback(new Error('Only JPG, jpeg, PNGm and GIF image files are allowed!'), false);
+    }
+    callback(null, true);
+    },
+  upload  = multer({storage: storage, fileFilter: imageFilter}),
+  middleware = require('../middleware'),
+  User = require('../model/user');
 
 
 /* GET home page. */
